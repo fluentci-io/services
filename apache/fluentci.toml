@@ -1,0 +1,11 @@
+[package]
+name = "apache"
+version = "0.1.0"
+description = "Apache Plugin for FluentCI"
+license = "MIT"
+keywords = [
+  "apache"
+]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>"
+]
