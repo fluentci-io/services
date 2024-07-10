@@ -6,14 +6,14 @@ pub mod helpers;
 #[plugin_fn]
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
+    let port = dag().get_env("DRAGONFLY_PORT")?;
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
-        .with_exec(vec!["duckdb", "-version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["type", "duckdb"])?
         .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)

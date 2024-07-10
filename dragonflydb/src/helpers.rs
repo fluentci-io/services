@@ -7,12 +7,17 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["mkdir", "-p", ".fluentci"])?
         .stdout()?;
 
+    let port = dag().get_env("DRAGONFLY_PORT")?;
+    if port.is_empty() {
+        dag().set_envs(vec![("DRAGONFLY_PORT".into(), "6379".into())])?;
+    }
+
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
-        .with_exec(vec!["flox", "install", "dragonflydb", "overmind", "tmux"])?
+        .with_exec(vec!["flox", "install", "docker", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q duckdb Procfile || echo 'dragonflydb: dragonfly --logtostderr' >> Procfile",
+            "grep -q dragonflydb Procfile || echo 'dragonflydb: docker run -p $DRAGONFLY_PORT:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly' >> Procfile",
         ])?
         .stdout()?;
 
