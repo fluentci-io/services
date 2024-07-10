@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - duckdb/**
+      - .github/workflows/duckdb.yml
 jobs:
   duckdb-test:
     runs-on: ubuntu-latest

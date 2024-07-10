@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - apache/**
+      - .github/workflows/apache.yml
 jobs:
   apache-test:
     runs-on: ubuntu-latest

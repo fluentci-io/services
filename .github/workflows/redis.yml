@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - redis/**
+      - .github/workflows/redis.yml
 jobs:
   redis-test:
     runs-on: ubuntu-latest
