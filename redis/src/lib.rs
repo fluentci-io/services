@@ -7,7 +7,7 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["redis-server", "--version"])?
@@ -23,7 +23,7 @@ pub fn start(_args: String) -> FnResult<String> {
 pub fn stop(args: String) -> FnResult<String> {
     helpers::setup()?;
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
