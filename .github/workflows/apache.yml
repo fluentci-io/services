@@ -25,7 +25,8 @@ jobs:
       - name: Start Apache HTTP Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/apache.wasm start
+          fluentci run target/wasm32-unknown-unknown/release/apache.wasm stop web
         working-directory: apache
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}
