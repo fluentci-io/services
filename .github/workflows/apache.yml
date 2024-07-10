@@ -28,3 +28,4 @@ jobs:
         working-directory: apache
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
