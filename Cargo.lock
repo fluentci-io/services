@@ -15,6 +15,7 @@ dependencies = [
  "anyhow",
  "extism-pdk",
  "fluentci-pdk",
+ "fluentci-types",
 ]
 
 [[package]]

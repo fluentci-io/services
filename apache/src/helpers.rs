@@ -1,5 +1,6 @@
 use anyhow::Error;
 use fluentci_pdk::dag;
+use fluentci_types::nix::NixArgs;
 
 pub fn setup() -> Result<String, Error> {
     dag()
@@ -10,7 +11,7 @@ pub fn setup() -> Result<String, Error> {
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
-        .with_exec(vec!["flox", "install", "apache", "overmind"])?
+        .with_exec(vec!["flox", "install", "apacheHttpd", "overmind"])?
         .stdout()?;
 
     Ok(stdout)
