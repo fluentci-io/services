@@ -2,10 +2,10 @@
 authors = [
   "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
-description = "Duckdb Plugin for FluentCI"
+description = "Redis Plugin for FluentCI"
 keywords = [
-  "duckdb",
+  "redis",
 ]
 license = "MIT"
-name = "duckdb"
+name = "redis"
 version = "0.1.0"

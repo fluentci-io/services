@@ -4,9 +4,9 @@ on:
     branches:
       - main
     paths:
-      - duckdb/**
+      - redis/**
 jobs:
-  duckdb-test:
+  redis-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,14 +18,14 @@ jobs:
           args: |
             target_add wasm32-unknown-unknown
             build --release --target wasm32-unknown-unknown
-          working-directory: duckdb
+          working-directory: redis
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Start Duckdb
+      - name: Start Redis
         run: |
-          fluentci run target/wasm32-unknown-unknown/release/duckdb.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/duckdb.wasm stop duckdb
-        working-directory: duckdb
+          fluentci run target/wasm32-unknown-unknown/release/redis.wasm start
+          fluentci run target/wasm32-unknown-unknown/release/redis.wasm stop redis
+        working-directory: redis
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}

@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - apache/**
 jobs:
   apache-test:
     runs-on: ubuntu-latest

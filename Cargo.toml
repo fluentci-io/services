@@ -1,4 +1,4 @@
 [workspace]
-default-members = ["apache", "duckdb"]
-members = ["apache", "duckdb"]
+default-members = ["apache", "duckdb", "redis"]
+members = ["apache", "duckdb", "redis"]
 resolver = "2"
