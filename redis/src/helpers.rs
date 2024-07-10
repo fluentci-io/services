@@ -12,7 +12,7 @@ pub fn setup() -> Result<String, Error> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["flox", "install", "redis", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q redis Procfile || echo 'redis: redis >> Procfile",
+            "grep -q redis Procfile || echo 'redis: redis-server' >> Procfile",
         ])?
         .stdout()?;
 
