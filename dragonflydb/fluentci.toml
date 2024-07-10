@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Dragonfly Plugin for FluentCI"
+keywords = [
+  "dragonflydb",
+]
+license = "MIT"
+name = "dragonflydb"
+version = "0.1.0"
