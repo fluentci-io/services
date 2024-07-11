@@ -29,7 +29,7 @@ pub fn setup() -> Result<String, Error> {
     let caddy_config = dag().get_env("CADDY_CONFIG")?;
 
     if caddy_root_dir.is_empty() {
-        dag().set_envs(vec![("CADDY_ROOT_DIR".into(), "../".into())])?;
+        dag().set_envs(vec![("CADDY_ROOT_DIR".into(), "./".into())])?;
     }
 
     if caddy_log_dir.is_empty() {
