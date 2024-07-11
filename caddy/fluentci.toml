@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Caddy Plugin for FluentCI"
+keywords = [
+  "caddy",
+]
+license = "MIT"
+name = "caddy"
+version = "0.1.0"
