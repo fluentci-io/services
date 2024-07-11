@@ -18,6 +18,10 @@ pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
         .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/logs", ".fluentci/temp"])?
+        .with_exec(vec![
+            "grep -q logs .fluentci/.gitignore || echo -e 'logs\\ntemp' >> .fluentci/.gitignore",
+        ])?
         .stdout()?;
 
     let nginx_port = dag().get_env("NGINX_WEB_PORT")?;
@@ -43,7 +47,8 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f ../nginx.template ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/nginx.template -O ../nginx.template"])?
         .with_exec(vec!["[ -f fastcgi.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/fastcgi.conf"])?
         .with_exec(vec!["[ -f ../index.html ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/web/index.html -O ../index.html"])?
-        .with_exec(vec![r#"if [ -f ../nginx.template ]; then envsubst $(awk 'BEGIN {for (k in ENVIRON) {printf "$"k","}}') < ../nginx.template > nginx.conf; fi"#])?
+        .with_exec(vec!["[ -f ../nginx.template ] && envsubst < ../nginx.template > nginx.conf"])?
+        .with_exec(vec!["cat nginx.conf"])?
         .with_exec(vec![
             "grep -q nginx Procfile || echo 'nginx: nginx -p $PWD -c $PWD/nginx.conf -e error.log -g \"pid nginx.pid;daemon off;\"' >> Procfile",
         ])?
