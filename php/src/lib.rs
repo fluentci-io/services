@@ -17,7 +17,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "php"])?
         .with_exec(vec!["type", "php-fpm"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec!["overmind", "start", "-f", "Procfile"])?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)

@@ -28,7 +28,7 @@ jobs:
       - name: Start Httpbin Server
         run: |
           fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm start
-          fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm stop httpbin
+          fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm stop php-fpm
         working-directory: php/example
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
