@@ -37,7 +37,7 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if nginx_web_root.is_empty() {
-        dag().set_envs(vec![("NGINX_WEB_ROOT".into(), "./".into())])?;
+        dag().set_envs(vec![("NGINX_WEB_ROOT".into(), "../".into())])?;
     }
 
     let stdout = dag()
