@@ -24,11 +24,15 @@ pub fn setup() -> Result<String, Error> {
             "grep -q log .fluentci/.gitignore || echo 'log/' >> .fluentci/.gitignore",
         ])?
         .stdout()?;
-
+    let pwd = dag().get_env("PWD")?;
+    let phprc = dag().get_env("PHPRC")?;
     let phpfpm_port = dag().get_env("PHPFPM_PORT")?;
     let phpfpm_pid_file = dag().get_env("PHPFPM_PID_FILE")?;
     let phpfpm_error_log_file = dag().get_env("PHPFPM_ERROR_LOG_FILE")?;
 
+    if phprc.is_empty() {
+        dag().set_envs(vec![("PHPRC".into(), pwd)])?;
+    }
     if phpfpm_port.is_empty() {
         dag().set_envs(vec![("PHPFPM_PORT".into(), "8080".into())])?;
     }
@@ -65,12 +69,11 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec!["cp ../composer.json ."])?
         .with_exec(vec!["cp ../composer.lock ."])?
+        .with_exec(vec!["[ -f ../php.ini ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php.ini -O ../php.ini"])?
+        .with_exec(vec![r#"grep -q extension_dir ../php.ini || echo -e "\nextension_dir = \"$(ls -d .flox/run/*/lib/php/extensions)\"" >> ../php.ini"#])?
         .with_exec(vec!["composer", "install"])?
         .with_exec(vec!["rm -rf ../vendor && mv vendor .."])?
         .with_exec(vec!["[ -f ../php-fpm.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
-        .with_exec(vec![
-            "grep -q 'php:' Procfile || echo 'php: cd .. && php public/index.php' >> Procfile",
-        ])?
         .with_exec(vec![
             "grep -q php-fpm Procfile || echo 'php-fpm: cd .. && php-fpm -y $PWD/php-fpm.conf --nodaemonize' >> Procfile",
         ])?
