@@ -263,6 +263,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
+name = "php-fpm"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "proc-macro-crate"
 version = "3.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

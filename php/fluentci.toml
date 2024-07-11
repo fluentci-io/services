@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "php-fpm Plugin for FluentCI"
+keywords = [
+  "php-fpm",
+]
+license = "MIT"
+name = "php-fpm"
+version = "0.1.0"
