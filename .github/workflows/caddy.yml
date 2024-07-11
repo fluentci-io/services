@@ -28,8 +28,6 @@ jobs:
       - name: Start Caddy Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/caddy.wasm start
-          echo 'curl http://localhost:8082'
-          curl -s http://localhost:8082
           fluentci run target/wasm32-unknown-unknown/release/caddy.wasm stop caddy
         working-directory: caddy
         env:

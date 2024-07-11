@@ -27,6 +27,7 @@ pub fn setup() -> Result<String, Error> {
     let caddy_root_dir = dag().get_env("CADDY_ROOT_DIR")?;
     let caddy_log_dir = dag().get_env("CADDY_LOG_DIR")?;
     let caddy_config = dag().get_env("CADDY_CONFIG")?;
+    let caddy_port = dag().get_env("CADDY_PORT")?;
 
     if caddy_root_dir.is_empty() {
         dag().set_envs(vec![("CADDY_ROOT_DIR".into(), "./".into())])?;
@@ -34,6 +35,10 @@ pub fn setup() -> Result<String, Error> {
 
     if caddy_log_dir.is_empty() {
         dag().set_envs(vec![("CADDY_LOG_DIR".into(), ".fluentci/logs".into())])?;
+    }
+
+    if caddy_port.is_empty() {
+        dag().set_envs(vec![("CADDY_PORT".into(), "8082".into())])?;
     }
 
     let opts = if caddy_config.is_empty() {
