@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Nginx Plugin for FluentCI"
+keywords = [
+  "nginx",
+]
+license = "MIT"
+name = "nginx"
+version = "0.1.0"
