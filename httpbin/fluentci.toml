@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Httpbin Plugin for FluentCI"
+keywords = [
+  "httpbin",
+]
+license = "MIT"
+name = "httpbin"
+version = "0.1.0"
