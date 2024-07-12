@@ -47,9 +47,10 @@ pub fn setup() -> Result<String, Error> {
             "flox", "install", "mariadb", "overmind", "tmux"
         ])?
         .with_exec(vec!["[ -d $MYSQL_DATADIR ] || mkdir -p $MYSQL_DATADIR"])?
-        .with_exec(vec!["[ -f $MYSQL_DATADIR/ca.pem ] || flox activate -- mysql_install_db --auth-root-authentication-method=normal --datadir=$MYSQL_DATADIR --pid-file=$MYSQL_HOME/mysql.pid"])?
+        .with_exec(vec!["touch ~/.my.cnf"])?
+        .with_exec(vec!["[ -d $MYSQL_DATADIR/sys ] || flox activate -- mysql_install_db --auth-root-authentication-method=normal --user=`whoami` --datadir=$MYSQL_DATADIR --pid-file=$MYSQL_HOME/mysql.pid --defaults-file=~/.my.cnf"])?
         .with_exec(vec![
-            "grep -q mariadb Procfile || echo 'mariadb: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket' >> Procfile",
+            "grep -q mariadb Procfile || echo 'mariadb: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket --defaults-file=$HOME/.my.cnf' >> Procfile",
         ])?
         .stdout()?;
 

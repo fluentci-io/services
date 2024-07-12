@@ -16,7 +16,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "mysql"])?
         .with_exec(vec!["echo -e \"MySQL starting on port $MYSQL_PORT\""])?
         .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
-        .with_exec(vec!["sleep", "2"])?
+        .wait_on(port.parse()?, None)?
         .with_exec(vec!["cat", "$MYSQL_HOME/mysql.log"])?
         .with_exec(vec!["overmind", "status"])?
         .wait_on(port.parse()?, None)?
