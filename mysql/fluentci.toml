@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "MySQL Plugin for FluentCI"
+keywords = [
+  "mysql",
+]
+license = "MIT"
+name = "mysql"
+version = "0.1.0"

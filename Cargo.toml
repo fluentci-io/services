@@ -1,4 +1,4 @@
 [workspace]
-default-members = ["apache", "redis", "dragonflydb", "nginx", "caddy", "httpbin", "php"]
-members = ["apache", "redis", "dragonflydb", "nginx", "caddy", "httpbin", "php"]
+default-members = ["apache", "redis", "dragonflydb", "nginx", "caddy", "httpbin", "php", "mysql"]
+members = ["apache", "redis", "dragonflydb", "nginx", "caddy", "httpbin", "php", "mysql"]
 resolver = "2"
