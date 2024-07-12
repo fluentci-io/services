@@ -51,12 +51,29 @@ pub fn setup() -> Result<String, Error> {
         )])?;
     }
 
+    let php_extensions = dag().get_env("PHP_EXTENSIONS")?;
+    if php_extensions.is_empty() {
+        dag().set_envs(vec![(
+            "PHP_EXTENSIONS".into(),
+            "imagick ds pgsql xdebug".into(),
+        )])?;
+    }
+
+    let php_extensions = dag()
+        .get_env("PHP_EXTENSIONS")?
+        .split_whitespace()
+        .map(|ext| format!("php83Extensions.{}", ext))
+        .collect::<Vec<String>>()
+        .join(" ");
+
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec![
             "flox",
             "install",
+            &php_extensions,
+            /*
             "php83Extensions.phalcon",
             "php83Extensions.imagick",
             "php83Extensions.snuffleupagus",
@@ -144,7 +161,7 @@ pub fn setup() -> Result<String, Error> {
             "php83Extensions.pinba",
             "php83Extensions.pdlib",
             "php83Extensions.apcu",
-            "php83Extensions.zstd",
+            "php83Extensions.zstd",*/
             "php83Packages.composer",
             "php83",
             "overmind",
