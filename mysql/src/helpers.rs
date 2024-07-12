@@ -44,7 +44,7 @@ pub fn setup() -> Result<String, Error> {
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec![
-            "flox", "install", "mysql", "overmind", "tmux", "wget", "curl",
+            "flox", "install", "mysql84", "overmind", "tmux"
         ])?
         .with_exec(vec!["[ -d $MYSQL_DATADIR ] || mkdir -p $MYSQL_DATADIR"])?
         .with_exec(vec!["[ -z \"$(ls -A $MYSQL_DATADIR)\" ] && mysqld --initialize-insecure"])?
