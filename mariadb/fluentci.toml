@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "MariaDB Plugin for FluentCI"
+keywords = [
+  "mariadb",
+]
+license = "MIT"
+name = "mariadb"
+version = "0.1.0"
