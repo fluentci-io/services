@@ -34,7 +34,7 @@ pub fn setup() -> Result<String, Error> {
         dag().set_envs(vec![("PHPRC".into(), pwd.clone())])?;
     }
     if phpfpm_port.is_empty() {
-        dag().set_envs(vec![("PHPFPM_PORT".into(), "8080".into())])?;
+        dag().set_envs(vec![("PHPFPM_PORT".into(), "9000".into())])?;
     }
 
     if phpfpm_pid_file.is_empty() {

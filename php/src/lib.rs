@@ -7,6 +7,8 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
 
+    let port = dag().get_env("PHPFPM_PORT")?;
+
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
@@ -20,6 +22,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
         .with_exec(vec!["sleep", "2"])?
         .with_exec(vec!["overmind", "status"])?
+        .wait_on(port.parse()?, None)?
         .stdout()?;
     Ok(stdout)
 }
