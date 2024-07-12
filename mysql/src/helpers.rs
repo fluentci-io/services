@@ -47,9 +47,9 @@ pub fn setup() -> Result<String, Error> {
             "flox", "install", "mysql84", "overmind", "tmux"
         ])?
         .with_exec(vec!["[ -d $MYSQL_DATADIR ] || mkdir -p $MYSQL_DATADIR"])?
-        .with_exec(vec!["[ -z \"$(ls -A $MYSQL_DATADIR)\" ] && flox activate -- mysqld --initialize-insecure --datadir=$MYSQL_DATADIR --basedir=$MYSQL_HOME --log-error=$MYSQL_HOME/mysql.log"])?
+        .with_exec(vec!["[ -f $MYSQL_DATADIR/ca.pem ] || flox activate -- mysqld --initialize-insecure --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log"])?
         .with_exec(vec![
-            "grep -q mysql Procfile || echo 'mysql: mysqld --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT' >> Procfile",
+            "grep -q mysql Procfile || echo 'mysql: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket' >> Procfile",
         ])?
         .stdout()?;
 
