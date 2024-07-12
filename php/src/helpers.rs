@@ -145,7 +145,6 @@ pub fn setup() -> Result<String, Error> {
             "php83Extensions.datadog_trace",
             "php83Extensions.gd",
             "php83Extensions.uv",
-            "php83Extensions.inotify",
             "php83Extensions.pinba",
             "php83Extensions.pdlib",
             "php83Extensions.apcu",
