@@ -31,7 +31,7 @@ pub fn setup() -> Result<String, Error> {
     let phpfpm_error_log_file = dag().get_env("PHPFPM_ERROR_LOG_FILE")?;
 
     if phprc.is_empty() {
-        dag().set_envs(vec![("PHPRC".into(), pwd)])?;
+        dag().set_envs(vec![("PHPRC".into(), pwd.clone())])?;
     }
     if phpfpm_port.is_empty() {
         dag().set_envs(vec![("PHPFPM_PORT".into(), "8080".into())])?;
@@ -40,14 +40,14 @@ pub fn setup() -> Result<String, Error> {
     if phpfpm_pid_file.is_empty() {
         dag().set_envs(vec![(
             "PHPFPM_PID_FILE".into(),
-            ".fluentci/php-fpm.pid".into(),
+            format!("{}/.fluentci/php-fpm.pid", pwd),
         )])?;
     }
 
     if phpfpm_error_log_file.is_empty() {
         dag().set_envs(vec![(
             "PHPFPM_ERROR_LOG_FILE".into(),
-            ".fluentci/log/php-fpm.error.log".into(),
+            format!("{}/.fluentci/log/php-fpm.error.log", pwd),
         )])?;
     }
 
@@ -75,7 +75,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["rm -rf ../vendor && mv vendor .."])?
         .with_exec(vec!["[ -f ../php-fpm.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
         .with_exec(vec![
-            "grep -q php-fpm Procfile || echo 'php-fpm: cd .. && php-fpm -y $PWD/php-fpm.conf --nodaemonize' >> Procfile",
+            "grep -q php-fpm Procfile || echo 'php-fpm: php-fpm -y ../php-fpm.conf --nodaemonize' >> Procfile",
         ])?
         .stdout()?;
 
