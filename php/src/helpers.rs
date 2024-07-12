@@ -104,7 +104,7 @@ pub fn setup() -> Result<String, Error> {
             "php83Extensions.session",
             "php83Extensions.sockets",
             "php83Extensions.sqlite3",
-            "php83Extensions.sysvmg",
+            "php83Extensions.sysvsmg",
             "php83Extensions.sysvsem",
             "php83Extensions.sysvshm",
             "php83Extensions.rrd",
