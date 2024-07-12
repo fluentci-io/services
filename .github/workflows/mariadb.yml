@@ -14,6 +14,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
+      - name: Uninstall default MySQL
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo service mysql stop
+          sudo apt-get remove --purge mysql-server mysql-client mysql-common -y
+          sudo apt-get autoremove -y
+          sudo apt-get autoclean
+          sudo rm -rf /etc/mysql
+          sudo rm -rf /var/lib/mysql
       - name: Setup Fluent CI
         uses: fluentci-io/setup-fluentci@v5
         with:
