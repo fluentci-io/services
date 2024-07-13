@@ -50,7 +50,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["touch ~/.my.cnf"])?
         .with_exec(vec!["[ -d $MYSQL_DATADIR/sys ] || flox activate -- mysql_install_db --auth-root-authentication-method=normal --user=`whoami` --datadir=$MYSQL_DATADIR --pid-file=$MYSQL_HOME/mysql.pid --defaults-file=~/.my.cnf"])?
         .with_exec(vec![
-            "grep -q mariadb Procfile || echo 'mariadb: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket' >> Procfile",
+            "grep -q mariadb Procfile || echo 'mariadb: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket --user=`whoami`' >> Procfile",
         ])?
         .stdout()?;
 

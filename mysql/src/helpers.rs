@@ -49,7 +49,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -d $MYSQL_DATADIR ] || mkdir -p $MYSQL_DATADIR"])?
         .with_exec(vec!["[ -f $MYSQL_DATADIR/ca.pem ] || flox activate -- mysqld --initialize-insecure --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log"])?
         .with_exec(vec![
-            "grep -q mysql Procfile || echo 'mysql: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket' >> Procfile",
+            "grep -q mysql Procfile || echo 'mysql: mysqld --datadir=$MYSQL_DATADIR --log-error=$MYSQL_HOME/mysql.log --port=$MYSQL_PORT --socket=$MYSQL_HOME/mysql.socket --user=`whoami`' >> Procfile",
         ])?
         .stdout()?;
 
