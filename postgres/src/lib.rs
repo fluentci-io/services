@@ -15,7 +15,9 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "postgres"])?
         .with_exec(vec!["echo -e \"Postgres starting on port $PGPORT\""])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec![
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart postgres",
+        ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;

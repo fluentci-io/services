@@ -19,7 +19,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "php"])?
         .with_exec(vec!["type", "php-fpm"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec!["overmind start -f Procfile --daemonize || || flox activate -- overmind restart php-fpm"])?
         .with_exec(vec!["sleep", "2"])?
         .with_exec(vec!["overmind", "status"])?
         .wait_on(port.parse()?, None)?

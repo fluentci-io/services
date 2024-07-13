@@ -12,7 +12,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec!["overmind start -f Procfile --daemonize || flox activate -- overmind restart dragonflydb"])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;

@@ -16,7 +16,9 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["gunicorn", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "gunicorn"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec![
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart httpbin",
+        ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["curl", "-s", "http://localhost:$HTTPBIN_PORT"])?

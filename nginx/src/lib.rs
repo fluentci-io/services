@@ -17,7 +17,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "echo -e \"Nginx starting on port $NGINX_WEB_PORT\\n http://localhost:$NGINX_WEB_PORT\"",
         ])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec!["overmind start -f Procfile --daemonize || flox activate -- overmind restart nginx"])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["curl", "-s", "http://localhost:$NGINX_WEB_PORT"])?

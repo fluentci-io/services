@@ -20,7 +20,9 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["caddy", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "caddy"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec![
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart caddy",
+        ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["curl", "-s", "http://localhost:$CADDY_PORT"])?

@@ -13,7 +13,9 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["redis-server", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "redis-server"])?
-        .with_exec(vec!["overmind", "start", "-f", "Procfile", "--daemonize"])?
+        .with_exec(vec![
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart redis",
+        ])?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
