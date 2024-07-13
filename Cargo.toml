@@ -10,6 +10,7 @@ default-members = [
   "mysql",
   "mariadb",
   "postgres",
+  "temporal",
 ]
 members = [
   "apache",
@@ -22,5 +23,6 @@ members = [
   "mysql",
   "mariadb",
   "postgres",
+  "temporal",
 ]
 resolver = "2"

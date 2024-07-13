@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Temporal Plugin for FluentCI"
+keywords = [
+  "temporal",
+]
+license = "MIT"
+name = "temporal"
+version = "0.1.0"

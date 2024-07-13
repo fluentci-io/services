@@ -43,6 +43,7 @@ fluentci run --wasm postgres start
 | [postgres](./postgres)       | A database management system that is object-relational |
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
 | [redis](./redis)             | An in-memory database that persists on disk | 
+| [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
 
 ## 🤝 Contributing
 
