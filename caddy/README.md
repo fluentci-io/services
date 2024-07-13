@@ -1,5 +1,6 @@
 # Caddy Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/caddy)](https://pkg.fluentci.io/caddy)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/caddy.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/caddy.yml)
 
 Caddy service plugin for FluentCI.

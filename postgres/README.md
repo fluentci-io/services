@@ -1,5 +1,6 @@
 # Postgres Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/postgres)](https://pkg.fluentci.io/postgres)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/postgres.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/postgres.yml)
 
 Postgres service plugin for FluentCI.

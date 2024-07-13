@@ -1,5 +1,6 @@
 # Httpbin Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/httpbin)](https://pkg.fluentci.io/httpbin)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/httpbin.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/httpbin.yml)
 
 Caddy service plugin for FluentCI.

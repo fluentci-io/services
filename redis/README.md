@@ -1,5 +1,6 @@
 # Redis Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/redis)](https://pkg.fluentci.io/redis)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/redis.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/redis.yml)
 
 Redis service plugin for FluentCI.

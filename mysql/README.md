@@ -1,5 +1,6 @@
 # MySQL Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/mysql)](https://pkg.fluentci.io/mysql)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/mysql.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/mysql.yml)
 
 MySQL service plugin for FluentCI.

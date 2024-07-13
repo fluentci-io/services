@@ -1,5 +1,6 @@
 # Nginx Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/nginx)](https://pkg.fluentci.io/nginx)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/nginx.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/nginx.yml)
 
 Nginx service plugin for FluentCI.

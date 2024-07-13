@@ -1,5 +1,6 @@
 # MariaDB Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/mariadb)](https://pkg.fluentci.io/mariadb)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/mariadb.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/mariadb.yml)
 
 MariaDB service plugin for FluentCI.

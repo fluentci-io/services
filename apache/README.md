@@ -1,5 +1,6 @@
 # Apache Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/apache)](https://pkg.fluentci.io/apache)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/apache.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/apache.yml)
 
 Apache httpd service plugin for FluentCI.
@@ -35,7 +36,7 @@ use fluentci_pdk::dag;
 
 // ...
 
-dag().call("https://pkg.fluentci.io/apache@v0.1.0?wasm=1", "start", vec![])?;
+dag().call("https://pkg.fluentci.io/apache@v0.1.1?wasm=1", "start", vec![])?;
 ```
 
 ## 📚 Examples

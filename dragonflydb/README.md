@@ -1,5 +1,6 @@
 # Dragonfly Plugin
 
+[![fluentci pipeline](https://shield.fluentci.io/x/dragonflydb)](https://pkg.fluentci.io/dragonflydb)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/dragonflydb.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/dragonflydb.yml)
 
 Dragonfly service plugin for FluentCI.
