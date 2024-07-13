@@ -6,7 +6,7 @@ description = "RabbitMQ plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "rabbitmq"
-version = "0.1.2"
+version = "0.1.0"
 
 [lib]
 crate-type = [
