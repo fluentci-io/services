@@ -6,7 +6,6 @@ pub mod helpers;
 #[plugin_fn]
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
-    let port = dag().get_env("TEMPORAL_PORT")?;
     let stdout = dag()
         .pkgx()?
         .with_workdir(".fluentci")?
@@ -18,7 +17,14 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || overmind restart temporal",
         ])?
-        .wait_on(port.parse()?, None)?
+        .with_exec(vec![
+            "pkgx",
+            "deno",
+            "run",
+            "-A",
+            "npm:wait-port",
+            "$TEMPORAL_PORT",
+        ])?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
