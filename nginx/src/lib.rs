@@ -28,6 +28,13 @@ pub fn start(_args: String) -> FnResult<String> {
 #[plugin_fn]
 pub fn stop(args: String) -> FnResult<String> {
     helpers::setup()?;
+
+    let args = if args.is_empty() {
+        "nginx".to_string()
+    } else {
+        args
+    };
+
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?

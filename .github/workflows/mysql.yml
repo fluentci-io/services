@@ -28,7 +28,7 @@ jobs:
       - name: Start MySQL Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/mysql.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/mysql.wasm stop mysql
+          fluentci run target/wasm32-unknown-unknown/release/mysql.wasm stop
         working-directory: mysql
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -28,7 +28,7 @@ jobs:
       - name: Start PHP-FPM
         run: |
           fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm start
-          fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm stop php-fpm
+          fluentci run ../target/wasm32-unknown-unknown/release/php_fpm.wasm stop
         working-directory: php/example
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

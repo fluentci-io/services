@@ -28,7 +28,7 @@ jobs:
       - name: Start Nginx Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/nginx.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/nginx.wasm stop nginx
+          fluentci run target/wasm32-unknown-unknown/release/nginx.wasm stop
         working-directory: nginx
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

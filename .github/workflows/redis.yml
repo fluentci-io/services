@@ -28,7 +28,7 @@ jobs:
       - name: Start Redis
         run: |
           fluentci run target/wasm32-unknown-unknown/release/redis.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/redis.wasm stop redis
+          fluentci run target/wasm32-unknown-unknown/release/redis.wasm stop
         working-directory: redis
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

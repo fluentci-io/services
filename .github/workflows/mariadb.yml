@@ -37,7 +37,7 @@ jobs:
       - name: Start MariaDB Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/mariadb.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/mariadb.wasm stop mariadb
+          fluentci run target/wasm32-unknown-unknown/release/mariadb.wasm stop
         working-directory: mariadb
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

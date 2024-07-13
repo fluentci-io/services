@@ -28,7 +28,7 @@ jobs:
       - name: Start Caddy Server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/caddy.wasm start
-          fluentci run target/wasm32-unknown-unknown/release/caddy.wasm stop caddy
+          fluentci run target/wasm32-unknown-unknown/release/caddy.wasm stop
         working-directory: caddy
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
