@@ -39,6 +39,9 @@ pub fn stop(args: String) -> FnResult<String> {
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "stop", &args])?
+        .with_exec(vec![
+            "mysqladmin -u root shutdown --socket=$MYSQL_HOME/mysql.socket",
+        ])?
         .stdout()?;
     Ok(stdout)
 }

@@ -6,7 +6,7 @@ description = "MySQL plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "mysql"
-version = "0.1.1"
+version = "0.1.2"
 
 [lib]
 crate-type = [
