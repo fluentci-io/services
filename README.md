@@ -38,6 +38,7 @@ fluentci run --wasm postgres start
 | [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached | 
 | [httpbin](./httpbin)         | HTTP Request & Response Service |
 | [mariadb](./mariadb)         | The open source relational database |
+| [meilisearch](./meilisearch) | A powerful, fast, open-source, easy to use search engine |
 | [mysql](./mysql)             | The world's most popular open source database |
 | [nginx](./nginx)             | HTTP and reverse proxy server |
 | [postgres](./postgres)       | A database management system that is object-relational |

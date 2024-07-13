@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Meilisearch Plugin for FluentCI"
+keywords = [
+  "meilisearch",
+]
+license = "MIT"
+name = "meilisearch"
+version = "0.1.0"
