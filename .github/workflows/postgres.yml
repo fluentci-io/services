@@ -14,13 +14,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - name: Uninstall Postgres
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get remove postgresql postgresql-contrib
-          sudo apt-get --purge remove postgresql postgresql-contrib
-          sudo apt-get autoremove
-          sudo apt-get autoclean
       - name: Setup Fluent CI
         uses: fluentci-io/setup-fluentci@v5
         with:
