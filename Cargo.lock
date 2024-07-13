@@ -364,6 +364,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "rabbitmq"
+version = "0.1.2"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "redis"
 version = "0.1.0"
 dependencies = [

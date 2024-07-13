@@ -42,6 +42,7 @@ fluentci run --wasm postgres start
 | [nginx](./nginx)             | HTTP and reverse proxy server |
 | [postgres](./postgres)       | A database management system that is object-relational |
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
+| [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
 
