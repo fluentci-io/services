@@ -29,6 +29,8 @@ jobs:
         run: |
           fluentci run target/wasm32-unknown-unknown/release/apache.wasm start
           fluentci run target/wasm32-unknown-unknown/release/apache.wasm stop
+          fluentci run target/wasm32-unknown-unknown/release/apache.wasm start
+          fluentci run target/wasm32-unknown-unknown/release/apache.wasm stop
         working-directory: apache
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

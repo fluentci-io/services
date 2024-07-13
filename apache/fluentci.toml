@@ -1,11 +1,11 @@
 [package]
-name = "apache"
-version = "0.1.0"
-description = "Apache Plugin for FluentCI"
-license = "MIT"
-keywords = [
-  "apache"
-]
 authors = [
-  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>"
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
+description = "Apache Plugin for FluentCI"
+keywords = [
+  "apache",
+]
+license = "MIT"
+name = "apache"
+version = "0.1.1"
