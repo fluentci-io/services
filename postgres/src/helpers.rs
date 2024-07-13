@@ -24,6 +24,8 @@ pub fn setup() -> Result<String, Error> {
 
     let pg_data_dir = dag().get_env("PGDATA")?;
     let pg_port = dag().get_env("PGPORT")?;
+    let lc_all = dag().get_env("LC_ALL")?;
+    let lc_ctype = dag().get_env("LC_CTYPE")?;
 
     if pg_port.is_empty() {
         dag().set_envs(vec![("PGPORT".into(), "5432".into())])?;
@@ -31,6 +33,14 @@ pub fn setup() -> Result<String, Error> {
 
     if pg_data_dir.is_empty() {
         dag().set_envs(vec![("PGDATA".into(), "pg_data".into())])?;
+    }
+
+    if lc_all.is_empty() {
+        dag().set_envs(vec![("LC_ALL".into(), "en_US.UTF-8".into())])?;
+    }
+
+    if lc_ctype.is_empty() {
+        dag().set_envs(vec![("LC_CTYPE".into(), "en_US.UTF-8".into())])?;
     }
 
     let stdout = dag()
