@@ -17,7 +17,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "echo -e \"Apache starting on port $HTTPD_PORT\\n http://localhost:$HTTPD_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart -f Procfile web",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart web",
         ])?
         .with_exec(vec!["sleep", "3"])?
         .with_exec(vec!["overmind", "status"])?
