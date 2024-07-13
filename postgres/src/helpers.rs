@@ -26,6 +26,7 @@ pub fn setup() -> Result<String, Error> {
     let pg_port = dag().get_env("PGPORT")?;
     let lc_all = dag().get_env("LC_ALL")?;
     let lc_ctype = dag().get_env("LC_CTYPE")?;
+    let pg_host = dag().get_env("PGHOST")?;
 
     if pg_port.is_empty() {
         dag().set_envs(vec![("PGPORT".into(), "5432".into())])?;
@@ -41,6 +42,10 @@ pub fn setup() -> Result<String, Error> {
 
     if lc_ctype.is_empty() {
         dag().set_envs(vec![("LC_CTYPE".into(), "en_US.UTF-8".into())])?;
+    }
+
+    if pg_host.is_empty() {
+        dag().set_envs(vec![("PGHOST".into(), "localhost".into())])?;
     }
 
     let stdout = dag()
