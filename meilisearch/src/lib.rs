@@ -11,7 +11,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["meilisearch", "--version"])
+        .with_exec(vec!["meilisearch", "--version"])?
         .with_exec(vec!["type", "meilisearch"])?
         .with_exec(vec!["echo -e \"Meilisearch starting on port $MEILI_PORT\""])?
         .with_exec(vec![
