@@ -11,8 +11,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["typesense", "--version"])?
-        .with_exec(vec!["type", "typesense"])?
+        .with_exec(vec!["type", "typesense-server"])?
         .with_exec(vec![
             "echo -e \"Typesense starting on port $TYPESENSE_API_PORT\"",
         ])?
