@@ -46,6 +46,7 @@ fluentci run --wasm postgres start
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
+| [typesense](./typesense)     | A fast, typo-tolerant search engine for building delightful search experiences |
 
 ## 🤝 Contributing
 

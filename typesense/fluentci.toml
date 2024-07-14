@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Typesense Plugin for FluentCI"
+keywords = [
+  "typesense",
+]
+license = "MIT"
+name = "typesense"
+version = "0.1.0"

@@ -13,6 +13,7 @@ default-members = [
   "postgres",
   "temporal",
   "rabbitmq",
+  "typesense",
 ]
 members = [
   "apache",
@@ -28,5 +29,6 @@ members = [
   "postgres",
   "temporal",
   "rabbitmq",
+  "typesense",
 ]
 resolver = "2"
