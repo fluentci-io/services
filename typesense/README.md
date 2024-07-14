@@ -10,7 +10,7 @@ Typesense service plugin for FluentCI.
 Add the following command to your CI configuration file:
 
 ```bash
-fluentci run --wasm meilisearch start
+fluentci run --wasm typesense start
 ```
 
 ## Functions
