@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Memcached Plugin for FluentCI"
+keywords = [
+  "memcached",
+]
+license = "MIT"
+name = "memcached"
+version = "0.1.0"

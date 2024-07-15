@@ -16,6 +16,7 @@ default-members = [
   "typesense",
   "mongodb",
   "dynamodb-local",
+  "memcached",
 ]
 members = [
   "apache",
@@ -34,5 +35,6 @@ members = [
   "typesense",
   "mongodb",
   "dynamodb-local",
+  "memcached",
 ]
 resolver = "2"
