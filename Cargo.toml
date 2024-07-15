@@ -17,6 +17,7 @@ default-members = [
   "mongodb",
   "dynamodb-local",
   "memcached",
+  "stripe-mock",
 ]
 members = [
   "apache",
@@ -36,5 +37,6 @@ members = [
   "mongodb",
   "dynamodb-local",
   "memcached",
+  "stripe-mock",
 ]
 resolver = "2"

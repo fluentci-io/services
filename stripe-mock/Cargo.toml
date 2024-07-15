@@ -2,10 +2,10 @@
 authors = [
   "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
-description = "Redis plugin for FluentCI"
+description = "Stripe Mock plugin for FluentCI"
 edition = "2021"
 license = "MIT"
-name = "redis"
+name = "stripe-mock"
 version = "0.1.0"
 
 [lib]
