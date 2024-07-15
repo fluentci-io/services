@@ -35,7 +35,8 @@ fluentci run --wasm postgres start
 |------------------------------|--------------------|
 | [apache](./apache)           | A powerful and flexible HTTP/1.1 compliant web server |
 | [caddy](./caddy)             | Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS  |
-| [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached | 
+| [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached |
+| [dynamodb-local](./dynamodb-local) | A local version of Amazon DynamoDB |
 | [httpbin](./httpbin)         | HTTP Request & Response Service |
 | [mariadb](./mariadb)         | The open source relational database |
 | [meilisearch](./meilisearch) | A powerful, fast, open-source, easy to use search engine |

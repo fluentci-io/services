@@ -15,6 +15,7 @@ default-members = [
   "rabbitmq",
   "typesense",
   "mongodb",
+  "dynamodb-local",
 ]
 members = [
   "apache",
@@ -32,5 +33,6 @@ members = [
   "rabbitmq",
   "typesense",
   "mongodb",
+  "dynamodb-local",
 ]
 resolver = "2"
