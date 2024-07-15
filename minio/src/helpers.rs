@@ -23,7 +23,7 @@ pub fn setup() -> Result<String, Error> {
     let minio_dir = dag().get_env("MINIO_DIR")?;
 
     if minio_dir.is_empty() {
-        dag().set_envs(vec![("MINIO_DIR".into(), ".".into())]);
+        dag().set_envs(vec![("MINIO_DIR".into(), ".".into())])?;
     }
 
     let stdout = dag()
