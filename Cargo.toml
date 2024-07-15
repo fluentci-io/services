@@ -14,6 +14,7 @@ default-members = [
   "temporal",
   "rabbitmq",
   "typesense",
+  "mongodb",
 ]
 members = [
   "apache",
@@ -30,5 +31,6 @@ members = [
   "temporal",
   "rabbitmq",
   "typesense",
+  "mongodb",
 ]
 resolver = "2"
