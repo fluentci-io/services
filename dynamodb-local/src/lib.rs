@@ -6,6 +6,9 @@ pub mod helpers;
 #[plugin_fn]
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
+
+    let port = dag().get_env("DYNAMODB_PORT")?;
+
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
@@ -19,14 +22,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || overmind restart dynamodb",
         ])?
-        .with_exec(vec![
-            "pkgx",
-            "deno",
-            "run",
-            "-A",
-            "npm:wait-port",
-            "$DYNAMODB_PORT",
-        ])?
+        .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
