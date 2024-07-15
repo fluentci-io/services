@@ -7,6 +7,12 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["mkdir", "-p", ".fluentci"])?
         .stdout()?;
 
+    let redis_port = dag().get_env("REDIS_PORT")?;
+
+    if redis_port.is_empty() {
+        dag().set_envs(vec![("REDIS_PORT".into(), "6379".into())])?;
+    }
+
     let stdout = dag()
         .pkgx()?
         .with_workdir(".fluentci")?
@@ -16,7 +22,7 @@ pub fn setup() -> Result<String, Error> {
             "github.com/tmux/tmux",
         ])?
         .with_exec(vec![
-            "grep -q redis Procfile || echo -e 'redis: redis-server\\n' >> Procfile",
+            "grep -q redis Procfile || echo -e 'redis: redis-server --port $REDIS_PORT \\n' >> Procfile",
         ])?
         .stdout()?;
 

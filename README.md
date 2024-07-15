@@ -48,6 +48,7 @@ fluentci run --wasm postgres start
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
+| [stripe-mock](./stripe-mock/) | a mock HTTP server that responds like the real Stripe API. |
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
 | [typesense](./typesense)     | A fast, typo-tolerant search engine for building delightful search experiences |
 

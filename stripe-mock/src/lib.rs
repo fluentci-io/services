@@ -7,17 +7,17 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
 
-    let port = dag().get_env("REDIS_PORT")?;
+    let port = dag().get_env("STRIPE_HTTP_PORT")?;
 
     let stdout = dag()
         .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
-        .with_exec(vec!["redis-server", "--version"])?
+        .with_exec(vec!["stripe-mock", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["type", "redis-server"])?
+        .with_exec(vec!["type", "stripe-mock"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart redis",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart stripe-mock",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
@@ -30,7 +30,7 @@ pub fn stop(args: String) -> FnResult<String> {
     helpers::setup()?;
 
     let args = if args.is_empty() {
-        "redis".to_string()
+        "stripe-mock".to_string()
     } else {
         args
     };

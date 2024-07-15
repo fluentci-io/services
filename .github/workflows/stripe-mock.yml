@@ -1,0 +1,35 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - stripe-mock/**
+      - .github/workflows/stripe-mock.yml
+jobs:
+  stripe-mock-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Fluent CI
+        uses: fluentci-io/setup-fluentci@v5
+        with:
+          wasm: true
+          plugin: rust
+          args: |
+            target_add wasm32-unknown-unknown
+            build --release --target wasm32-unknown-unknown
+          working-directory: stripe-mock
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start stripe-mock Server
+        run: |
+          fluentci run target/wasm32-unknown-unknown/release/stripe_mock.wasm start
+          fluentci run target/wasm32-unknown-unknown/release/stripe_mock.wasm stop
+        working-directory: stripe-mock
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}

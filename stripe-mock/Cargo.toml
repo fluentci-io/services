@@ -6,7 +6,7 @@ description = "Redis plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "redis"
-version = "0.1.1"
+version = "0.1.0"
 
 [lib]
 crate-type = [

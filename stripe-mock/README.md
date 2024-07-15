@@ -1,7 +1,7 @@
-# Redis Plugin
+# Stripe Mock Plugin
 
-[![fluentci pipeline](https://shield.fluentci.io/x/redis)](https://pkg.fluentci.io/redis)
-[![ci](https://github.com/fluentci-io/services/actions/workflows/redis.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/redis.yml)
+[![fluentci pipeline](https://shield.fluentci.io/x/stripe-mock)](https://pkg.fluentci.io/stripe-mock)
+[![ci](https://github.com/fluentci-io/services/actions/workflows/stripe-mock.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/stripe-mock.yml)
 
 Redis service plugin for FluentCI.
 
@@ -10,15 +10,15 @@ Redis service plugin for FluentCI.
 Add the following command to your CI configuration file:
 
 ```bash
-fluentci run --wasm redis start
+fluentci run --wasm stripe-mock start
 ```
 
 ## Functions
 
 | Name   | Description                                        |
 | ------ | -------------------------------------------------- |
-| start  | Start Redis server                                |
-| stop   | Stop Redis server                                 |
+| start  | Start Stripe Mock server                                |
+| stop   | Stop Stripe Mock server                                 |
 
 ## Code Usage
 
@@ -36,7 +36,7 @@ use fluentci_pdk::dag;
 
 // ...
 
-dag().call("https://pkg.fluentci.io/redis@v0.1.1?wasm=1", "start", vec![])?;
+dag().call("https://pkg.fluentci.io/stripe-mock@v0.1.0?wasm=1", "start", vec![])?;
 ```
 
 ## 📚 Examples
@@ -48,7 +48,7 @@ Github Actions:
   uses: fluentci-io/setup-fluentci@v5
   with:
     wasm: true
-    plugin: redis
+    plugin: stripe-mock
     args: |
       start
 ```
