@@ -8,6 +8,17 @@ pub fn setup() -> Result<String, Error> {
         format!("/home/linuxbrew/.linuxbrew/bin:{}", path),
     )])?;
 
+    let stripe_http_port = dag().get_env("STRIPE_HTTP_PORT")?;
+    let stripe_https_port = dag().get_env("STRIPE_HTTPS_PORT")?;
+
+    if stripe_http_port.is_empty() {
+        dag().set_envs(vec![("STRIPE_HTTP_PORT".into(), "12111".into())])?;
+    }
+
+    if stripe_https_port.is_empty() {
+        dag().set_envs(vec![("STRIPE_HTTPS_PORT".into(), "12112".into())])?;
+    }
+
     dag()
         .pipeline("setup")?
         .with_exec(vec!["mkdir", "-p", ".fluentci"])?
