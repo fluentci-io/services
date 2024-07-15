@@ -9,7 +9,6 @@ pub fn setup() -> Result<String, Error> {
 
     let mongodb_data_dir = dag().get_env("MONGODB_DATA_DIR")?;
     let mongodb_port = dag().get_env("MONGODB_PORT")?;
-    let mongodb_version = dag().get_env("MONGODB_VERSION")?;
     let pwd = dag().get_env("PWD")?;
 
     if mongodb_data_dir.is_empty() {
@@ -20,9 +19,6 @@ pub fn setup() -> Result<String, Error> {
         dag().set_envs(vec![("MONGODB_PORT".into(), "27017".into())])?;
     }
 
-    if mongodb_version.is_empty() {
-        dag().set_envs(vec![("MONGODB_VERSION".into(), "latest".into())])?;
-    }
 
     let stdout = dag()
         .pkgx()?
@@ -31,10 +27,10 @@ pub fn setup() -> Result<String, Error> {
             "[ -d $MONGODB_DATA_DIR ] || mkdir -p $MONGODB_DATA_DIR",
         ])?
         .with_packages(vec![
-            "overmind", "tmux"
+            "mongodb.com", "overmind", "tmux"
         ])?
         .with_exec(vec![
-            "grep -q mongodb Procfile || echo -e 'mongodb: pkgx +docker.com/cli docker run -v $MONGODB_DATA_DIR:/data/db -p $MONGODB_PORT:27017 mongo:$MONGODB_VERSION\\n' >> Procfile",
+            "grep -q mongodb Procfile || echo -e 'mongodb: mongod -dbPath $MONGODB_DATA_DIR --port $MONGODB_PORT \\n' >> Procfile",
         ])?
         .stdout()?;
 
