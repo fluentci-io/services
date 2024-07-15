@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "etcd Plugin for FluentCI"
+keywords = [
+  "etcd",
+]
+license = "MIT"
+name = "etcd"
+version = "0.1.0"
