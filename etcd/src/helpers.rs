@@ -23,9 +23,7 @@ pub fn setup() -> Result<String, Error> {
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
-        .with_exec(vec![
-            "flox", "install", "etcd", "etcdctl", "overmind", "tmux",
-        ])?
+        .with_exec(vec!["flox", "install", "etcd", "overmind", "tmux"])?
         .with_exec(vec![
             "grep -q etcd Procfile || echo -e 'etcd: etcd $ETCD_OPTS \\n' >> Procfile",
         ])?
