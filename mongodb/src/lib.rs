@@ -7,12 +7,10 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
     let stdout = dag()
-        .devbox()?
+        .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["type", "mongod"])?
-        .with_exec(vec!["mongod", "--version"])?
         .with_exec(vec!["echo -e \"MongoDB starting on port $MONGODB_PORT\""])?
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || overmind restart mongodb",
@@ -41,7 +39,7 @@ pub fn stop(args: String) -> FnResult<String> {
     };
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;

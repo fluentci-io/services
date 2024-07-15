@@ -1,4 +1,4 @@
-# Typesense Plugin
+# MongoDB Plugin
 
 [![fluentci pipeline](https://shield.fluentci.io/x/mongo)](https://pkg.fluentci.io/mongo)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/mongodb.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/mongodb.yml)
