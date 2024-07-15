@@ -47,6 +47,7 @@ fluentci run --wasm postgres start
 | [mysql](./mysql)             | The world's most popular open source database |
 | [nats](./nats)              | A simple, secure and high performance messaging system |
 | [nginx](./nginx)             | HTTP and reverse proxy server |
+| [nsq](./nsq)                 | A realtime distributed messaging platform |
 | [postgres](./postgres)       | A database management system that is object-relational |
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |

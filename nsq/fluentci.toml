@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Nsq Plugin for FluentCI"
+keywords = [
+  "nsq",
+]
+license = "MIT"
+name = "dynamodb-local"
+version = "0.1.0"
