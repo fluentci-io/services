@@ -23,7 +23,13 @@ pub fn setup() -> Result<String, Error> {
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
-        .with_exec(vec!["flox", "install", "elasticmq", "overmind", "tmux"])?
+        .with_exec(vec![
+            "flox",
+            "install",
+            "elasticmq-server-bin",
+            "overmind",
+            "tmux",
+        ])?
         .with_exec(vec![
             "grep -q elasticmq Procfile || echo -e 'elasticmq: elasticmq-server \\n' >> Procfile",
         ])?
