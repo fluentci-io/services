@@ -18,6 +18,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || flox activate -- overmind restart mariadb",
         ])?
+        .with_exec(vec!["sleep 2 && tail $MYSQL_HOME/mysql.log"])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["cat", "$MYSQL_HOME/mysql.log"])?
         .with_exec(vec!["overmind", "status"])?
