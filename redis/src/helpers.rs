@@ -16,7 +16,7 @@ pub fn setup() -> Result<String, Error> {
             "github.com/tmux/tmux",
         ])?
         .with_exec(vec![
-            "grep -q redis Procfile || echo 'redis: redis-server' >> Procfile",
+            "grep -q redis Procfile || echo -e 'redis: redis-server\\n' >> Procfile",
         ])?
         .stdout()?;
 

@@ -61,7 +61,7 @@ pub fn setup() -> Result<String, Error> {
             "[ -f $PGDATA/postgresql.conf ] || flox activate -- initdb",
         ])?
         .with_exec(vec![
-            "grep -q postgres Procfile || echo 'postgres: postgres -k $PWD -h $PGHOST -i' >> Procfile",
+            "grep -q postgres Procfile || echo -e 'postgres: postgres -k $PWD -h $PGHOST -i\\n' >> Procfile",
         ])?
         .stdout()?;
 

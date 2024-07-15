@@ -32,7 +32,7 @@ pub fn setup() -> Result<String, Error> {
             "flox", "install", "python312Packages.httpbin", "python312Packages.gunicorn", "python312Packages.gevent", "overmind", "tmux", "curl",
         ])?
         .with_exec(vec![
-            "grep -q httpin Procfile || echo 'httpbin: gunicorn httpbin:app -k gevent -b 127.0.0.1:$HTTPBIN_PORT' >> Procfile",
+            "grep -q httpin Procfile || echo -e 'httpbin: gunicorn httpbin:app -k gevent -b 127.0.0.1:$HTTPBIN_PORT\\n' >> Procfile",
         ])?
         .stdout()?;
 

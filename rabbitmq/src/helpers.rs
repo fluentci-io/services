@@ -18,7 +18,7 @@ pub fn setup() -> Result<String, Error> {
         .with_workdir(".fluentci")?
         .with_packages(vec!["rabbitmq.com", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q rabbitmq Procfile || echo 'rabbitmq: rabbitmq-server' >> Procfile",
+            "grep -q rabbitmq Procfile || echo -e 'rabbitmq: rabbitmq-server\\n' >> Procfile",
         ])?
         .stdout()?;
 

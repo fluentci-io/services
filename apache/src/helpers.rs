@@ -57,7 +57,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f httpd.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/httpd.conf"])?
         .with_exec(vec!["[ -f ../index.html ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/web/index.html -O ../index.html"])?
         .with_exec(vec![
-            "grep -q web Procfile || echo 'web: apachectl start -f $PWD/httpd.conf -D FOREGROUND' >> Procfile",
+            "grep -q web Procfile || echo -e 'web: apachectl start -f $PWD/httpd.conf -D FOREGROUND\\n' >> Procfile",
         ])?
         .stdout()?;
 

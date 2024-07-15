@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["flox", "install", "docker", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q dragonflydb Procfile || echo 'dragonflydb: docker run -p $DRAGONFLY_PORT:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly' >> Procfile",
+            "grep -q dragonflydb Procfile || echo -e 'dragonflydb: docker run -p $DRAGONFLY_PORT:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly\\n' >> Procfile",
         ])?
         .stdout()?;
 

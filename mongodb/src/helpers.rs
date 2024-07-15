@@ -34,7 +34,7 @@ pub fn setup() -> Result<String, Error> {
             "overmind", "tmux"
         ])?
         .with_exec(vec![
-            "grep -q mongodb Procfile || echo 'mongodb: pkgx +docker.com/cli docker run -v $MONGODB_DATA_DIR:/data/db -p $MONGODB_PORT:27017 mongo:$MONGODB_VERSION' >> Procfile",
+            "grep -q mongodb Procfile || echo -e 'mongodb: pkgx +docker.com/cli docker run -v $MONGODB_DATA_DIR:/data/db -p $MONGODB_PORT:27017 mongo:$MONGODB_VERSION\\n' >> Procfile",
         ])?
         .stdout()?;
 

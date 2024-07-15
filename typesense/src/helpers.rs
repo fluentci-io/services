@@ -47,7 +47,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -d $TYPESENSE_DATA_DIR ] || mkdir -p $TYPESENSE_DATA_DIR"])?
         .with_exec(vec!["flox", "install", "typesense", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q typesense Procfile || echo 'typesense: typesense-server --data-dir $TYPESENSE_DATA_DIR --api-key $TYPESENSE_API_KEY --api-host $TYPESENSE_API_HOST --api-port $TYPESENSE_API_PORT' >> Procfile",
+            "grep -q typesense Procfile || echo -e 'typesense: typesense-server --data-dir $TYPESENSE_DATA_DIR --api-key $TYPESENSE_API_KEY --api-host $TYPESENSE_API_HOST --api-port $TYPESENSE_API_PORT\\n' >> Procfile",
         ])?
         .stdout()?;
 

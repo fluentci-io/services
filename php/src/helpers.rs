@@ -177,7 +177,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["rm -rf ../vendor && mv vendor .."])?
         .with_exec(vec!["[ -f ../php-fpm.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
         .with_exec(vec![
-            "grep -q php-fpm Procfile || echo 'php-fpm: php-fpm -y ../php-fpm.conf --nodaemonize' >> Procfile",
+            "grep -q php-fpm Procfile || echo -e 'php-fpm: php-fpm -y ../php-fpm.conf --nodaemonize\\n' >> Procfile",
         ])?
         .stdout()?;
 

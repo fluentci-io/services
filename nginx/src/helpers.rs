@@ -50,7 +50,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f ../nginx.template ] && envsubst < ../nginx.template > nginx.conf"])?
         .with_exec(vec!["cat nginx.conf"])?
         .with_exec(vec![
-            "grep -q nginx Procfile || echo 'nginx: nginx -p $PWD -c $PWD/nginx.conf -e error.log -g \"pid nginx.pid;daemon off;\"' >> Procfile",
+            "grep -q nginx Procfile || echo -e 'nginx: nginx -p $PWD -c $PWD/nginx.conf -e error.log -g \"pid nginx.pid;daemon off;\"\\n' >> Procfile",
         ])?
         .stdout()?;
 

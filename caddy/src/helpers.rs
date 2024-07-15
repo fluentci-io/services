@@ -54,7 +54,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f ../Caddyfile ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/Caddyfile -O ../Caddyfile"])?
         .with_exec(vec!["[ -f ../index.html ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/web/index.html -O ../index.html"])?
         .with_exec(vec![
-            &format!("grep -q caddy Procfile || echo 'caddy: cd .. && caddy run {}' >> Procfile", opts),
+            &format!("grep -q caddy Procfile || echo -e 'caddy: cd .. && caddy run {}\\n' >> Procfile", opts),
         ])?
         .stdout()?;
 

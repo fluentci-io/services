@@ -41,7 +41,7 @@ pub fn setup() -> Result<String, Error> {
         .with_workdir(".fluentci")?
         .with_exec(vec!["flox", "install", "meilisearch", "overmind", "tmux"])?
         .with_exec(vec![
-            "grep -q meilisearch Procfile || echo 'meilisearch: meilisearch' >> Procfile",
+            "grep -q meilisearch Procfile || echo -e 'meilisearch: meilisearch\\n' >> Procfile",
         ])?
         .stdout()?;
 

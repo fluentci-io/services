@@ -19,7 +19,7 @@ pub fn setup() -> Result<String, Error> {
         .with_workdir(".fluentci")?
         .with_packages(vec!["temporal", "overmind", "tmux"])?
         .with_exec(vec![
-            &format!("grep -q temporal Procfile || echo 'temporal: temporal server start-dev --log-format=pretty --port=$TEMPORAL_PORT {}' >> Procfile", temporal_opts),
+            &format!("grep -q temporal Procfile || echo -e 'temporal: temporal server start-dev --log-format=pretty --port=$TEMPORAL_PORT {}\\n' >> Procfile", temporal_opts),
         ])?
         .stdout()?;
 
