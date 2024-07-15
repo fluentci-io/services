@@ -19,7 +19,6 @@ pub fn setup() -> Result<String, Error> {
         dag().set_envs(vec![("MONGODB_PORT".into(), "27017".into())])?;
     }
 
-
     let stdout = dag()
         .pkgx()?
         .with_workdir(".fluentci")?
@@ -30,7 +29,7 @@ pub fn setup() -> Result<String, Error> {
             "mongodb.com", "overmind", "tmux"
         ])?
         .with_exec(vec![
-            "grep -q mongodb Procfile || echo -e 'mongodb: mongod -dbPath $MONGODB_DATA_DIR --port $MONGODB_PORT \\n' >> Procfile",
+            "grep -q mongodb Procfile || echo -e 'mongodb: mongod --dbpath $MONGODB_DATA_DIR --port $MONGODB_PORT \\n' >> Procfile",
         ])?
         .stdout()?;
 
