@@ -7,19 +7,21 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
 
-    let port = dag().get_env("REDIS_PORT")?;
-
     let stdout = dag()
         .pkgx()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["overmind", "--version"])?
-        .with_exec(vec!["redis-server", "--version"])?
+        .with_exec(vec!["minikube", "version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["type", "redis-server"])?
+        .with_exec(vec!["type", "minikube"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart redis",
+            "overmind start -f Procfile --daemonize || overmind restart minikube",
         ])?
-        .wait_on(port.parse()?, None)?
+        .wait_on(32768, None)?
+        .wait_on(32769, None)?
+        .wait_on(32770, None)?
+        .wait_on(32771, None)?
+        .wait_on(32772, None)?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
@@ -30,7 +32,7 @@ pub fn stop(args: String) -> FnResult<String> {
     helpers::setup()?;
 
     let args = if args.is_empty() {
-        "redis".to_string()
+        "minikube".to_string()
     } else {
         args
     };

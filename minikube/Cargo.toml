@@ -2,11 +2,11 @@
 authors = [
   "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
-description = "Redis plugin for FluentCI"
+description = "Minikube plugin for FluentCI"
 edition = "2021"
 license = "MIT"
-name = "redis"
-version = "0.1.2"
+name = "minikube"
+version = "0.1.0"
 
 [lib]
 crate-type = [

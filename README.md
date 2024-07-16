@@ -43,6 +43,7 @@ fluentci run --wasm postgres start
 | [mariadb](./mariadb)         | The open source relational database |
 | [meilisearch](./meilisearch) | A powerful, fast, open-source, easy to use search engine |
 | [memcached](./memcached)     | A high-performance, distributed memory object caching system |
+| [minikube](./minikube)       | A tool that makes it easy to run Kubernetes locally |
 | [minio](./minio)             | A high performance distributed object storage server |
 | [mongodb](./mongodb)         | A general purpose, document-based, distributed database |
 | [mysql](./mysql)             | The world's most popular open source database |
