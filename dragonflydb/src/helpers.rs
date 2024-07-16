@@ -13,11 +13,13 @@ pub fn setup() -> Result<String, Error> {
     }
 
     let stdout = dag()
-        .flox()?
-        .with_workdir(".fluentci/dragondflydb")?
-        .with_exec(vec!["flox", "install", "docker", "overmind", "tmux"])?
+        .pkgx()?
+        .with_workdir(".fluentci/dragonflydb")?
+        .with_packages(vec![
+            "github.com/darthsim/overmind",
+            "github.com/tmux/tmux"])?
         .with_exec(vec![
-            "grep -q dragonflydb Procfile || echo -e 'dragonflydb: docker run -p $DRAGONFLY_PORT:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly\\n' >> Procfile",
+            "grep -q dragonflydb Procfile || echo -e 'dragonflydb: pkgx docker run -p $DRAGONFLY_PORT:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly\\n' >> Procfile",
         ])?
         .stdout()?;
 
