@@ -23,6 +23,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["consul", "kv", "put", "redis/config/minconns", "1"])?
         .with_exec(vec!["consul", "kv", "get", "redis/config/minconns"])?
+        .with_exec(vec!["consul", "kv", "delete", "redis/config/minconns"])?
         .stdout()?;
     Ok(stdout)
 }
