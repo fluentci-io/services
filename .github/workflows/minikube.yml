@@ -34,7 +34,7 @@ jobs:
         run: |
           brew install docker lima
           limactl start template://docker
-          docker context create lima-docker --docker "host=unix:///Users/runner/.lima/docker/sock/docker.sock
+          docker context create lima-docker --docker "host=unix:///Users/runner/.lima/docker/sock/docker.sock"
       - name: Start minikube server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/minikube.wasm start
