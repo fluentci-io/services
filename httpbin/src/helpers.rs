@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/httpbin"])?
         .stdout()?;
 
     let httpbin_port = dag().get_env("HTTPBIN_PORT")?;
@@ -27,7 +27,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/httpbin")?
         .with_exec(vec![
             "flox", "install", "python312Packages.httpbin", "python312Packages.gunicorn", "python312Packages.gevent", "overmind", "tmux", "curl",
         ])?

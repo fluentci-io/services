@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/mariadb"])?
         .stdout()?;
 
     let pwd = dag().get_env("PWD")?;
@@ -42,7 +42,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/mariadb")?
         .with_exec(vec![
             "flox", "install", "mariadb", "overmind", "tmux"
         ])?

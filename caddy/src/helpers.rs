@@ -18,9 +18,9 @@ pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
         .with_exec(vec!["mkdir", "-p", ".fluentci"])?
-        .with_exec(vec!["mkdir", "-p", ".fluentci/logs"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/caddy/logs"])?
         .with_exec(vec![
-            "grep -q logs .fluentci/.gitignore || echo 'logs' >> .fluentci/.gitignore",
+            "grep -q logs .fluentci/caddy/.gitignore || echo 'logs' >> .fluentci/caddy/.gitignore",
         ])?
         .stdout()?;
 
@@ -34,7 +34,10 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if caddy_log_dir.is_empty() {
-        dag().set_envs(vec![("CADDY_LOG_DIR".into(), ".fluentci/logs".into())])?;
+        dag().set_envs(vec![(
+            "CADDY_LOG_DIR".into(),
+            ".fluentci/caddy/logs".into(),
+        )])?;
     }
 
     if caddy_port.is_empty() {
@@ -49,12 +52,12 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/caddy")?
         .with_exec(vec!["flox", "install", "caddy", "overmind", "tmux", "wget", "curl"])?
-        .with_exec(vec!["[ -f ../Caddyfile ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/Caddyfile -O ../Caddyfile"])?
-        .with_exec(vec!["[ -f ../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/web/index.html -O ../index.html"])?
+        .with_exec(vec!["[ -f ../../Caddyfile ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/Caddyfile -O ../../Caddyfile"])?
+        .with_exec(vec!["[ -f ../../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/web/index.html -O ../../index.html"])?
         .with_exec(vec![
-            &format!("grep -q caddy Procfile || echo -e 'caddy: cd .. && caddy run {}\\n' >> Procfile", opts),
+            &format!("grep -q caddy Procfile || echo -e 'caddy: cd ../.. && caddy run {}\\n' >> Procfile", opts),
         ])?
         .stdout()?;
 

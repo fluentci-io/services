@@ -17,12 +17,12 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/elasticmq"])?
         .stdout()?;
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/elasticmq")?
         .with_exec(vec![
             "flox",
             "install",

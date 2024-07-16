@@ -11,7 +11,7 @@ pub fn start(_args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/php")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["php", "--version"])?
         .with_exec(vec!["php-fpm", "--version"])?
@@ -41,7 +41,7 @@ pub fn stop(args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/php")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
     Ok(stdout)

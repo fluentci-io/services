@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/apache"])?
         .stdout()?;
 
     let pwd = dag().get_env("PWD")?;
@@ -31,31 +31,34 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if httpd_confdir.is_empty() {
-        dag().set_envs(vec![("HTTPD_CONFDIR".into(), format!("{}/.fluentci", pwd))])?;
+        dag().set_envs(vec![(
+            "HTTPD_CONFDIR".into(),
+            format!("{}/.fluentci/apache", pwd),
+        )])?;
     }
 
     if httpd_error_log_file.is_empty() {
         dag().set_envs(vec![(
             "HTTPD_ERROR_LOG_FILE".into(),
-            format!("{}/.fluentci/log/error.log", pwd),
+            format!("{}/.fluentci/apache/log/error.log", pwd),
         )])?;
     }
 
     if httpd_access_log_file.is_empty() {
         dag().set_envs(vec![(
             "HTTPD_ACCESS_LOG_FILE".into(),
-            format!("{}/.fluentci/log/access.log", pwd),
+            format!("{}/.fluentci/apache/log/access.log", pwd),
         )])?;
     }
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/apache")?
         .with_exec(vec!["flox", "install", "apacheHttpd", "overmind", "tmux", "wget", "curl"])?
         .with_exec(vec!["mkdir", "-p", "log"])?
         .with_exec(vec![r#"[ -f log/.gitignore ] || echo -e 'error.log\naccess.log' > log/.gitignore"#])?
         .with_exec(vec!["[ -f httpd.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/httpd.conf"])?
-        .with_exec(vec!["[ -f ../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/web/index.html -O ../index.html"])?
+        .with_exec(vec!["[ -f ../../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/web/index.html -O ../../index.html"])?
         .with_exec(vec![
             "grep -q web Procfile || echo -e 'web: apachectl start -f $PWD/httpd.conf -D FOREGROUND\\n' >> Procfile",
         ])?

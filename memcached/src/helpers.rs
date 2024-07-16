@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/memcached"])?
         .stdout()?;
 
     let memcached_port = dag().get_env("MEMCACHED_PORT")?;
@@ -33,7 +33,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/memcached")?
         .with_exec(vec![
             "flox",
             "install",

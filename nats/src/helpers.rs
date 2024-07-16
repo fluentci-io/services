@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/nats"])?
         .stdout()?;
 
     let nats_port = dag().get_env("NATS_PORT")?;
@@ -33,7 +33,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/nats")?
         .with_exec(vec![
             "flox",
             "install",

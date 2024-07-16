@@ -19,9 +19,10 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/postgres"])?
         .stdout()?;
 
+    let pwd = dag().get_env("PWD")?;
     let pg_data_dir = dag().get_env("PGDATA")?;
     let pg_port = dag().get_env("PGPORT")?;
     let lc_all = dag().get_env("LC_ALL")?;
@@ -33,7 +34,7 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if pg_data_dir.is_empty() {
-        dag().set_envs(vec![("PGDATA".into(), "pg_data".into())])?;
+        dag().set_envs(vec![("PGDATA".into(), format!("{}/pg_data", pwd))])?;
     }
 
     if lc_all.is_empty() {
@@ -50,7 +51,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/postgres")?
         .with_exec(vec!["flox", "install", "postgresql", "overmind", "tmux"])?
         .with_exec(vec!["[ -d $PGDATA ] || mkdir -p $PGDATA"])?
         .with_exec(vec!["touch .gitignore"])?

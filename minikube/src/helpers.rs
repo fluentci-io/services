@@ -4,12 +4,12 @@ use fluentci_pdk::dag;
 pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/minikube"])?
         .stdout()?;
 
     let stdout = dag()
         .pkgx()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/minikube")?
         .with_packages(vec![
             "github.com/darthsim/overmind",
             "github.com/tmux/tmux",

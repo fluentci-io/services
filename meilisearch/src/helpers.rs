@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/meilisearch"])?
         .stdout()?;
 
     let meili_port = dag().get_env("MEILI_PORT")?;
@@ -38,7 +38,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/meilisearch")?
         .with_exec(vec!["flox", "install", "meilisearch", "overmind", "tmux"])?
         .with_exec(vec![
             "grep -q meilisearch Procfile || echo -e 'meilisearch: meilisearch\\n' >> Procfile",

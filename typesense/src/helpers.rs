@@ -17,9 +17,10 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/typesense"])?
         .stdout()?;
 
+    let pwd = dag().get_env("PWD")?;
     let api_port = dag().get_env("TYPESENSE_API_PORT")?;
     let api_host = dag().get_env("TYPESENSE_API_HOST")?;
     let api_key = dag().get_env("TYPESENSE_API_KEY")?;
@@ -38,12 +39,15 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if data_dir.is_empty() {
-        dag().set_envs(vec![("TYPESENSE_DATA_DIR".into(), "typesense/data".into())])?;
+        dag().set_envs(vec![(
+            "TYPESENSE_DATA_DIR".into(),
+            format!("{}/typesense/data", pwd),
+        )])?;
     }
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/typesense")?
         .with_exec(vec!["[ -d $TYPESENSE_DATA_DIR ] || mkdir -p $TYPESENSE_DATA_DIR"])?
         .with_exec(vec!["flox", "install", "typesense", "overmind", "tmux"])?
         .with_exec(vec![

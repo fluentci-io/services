@@ -19,9 +19,9 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci/log"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/php/log"])?
         .with_exec(vec![
-            "grep -q log .fluentci/.gitignore || echo 'log/' >> .fluentci/.gitignore",
+            "grep -q log .fluentci/php/.gitignore || echo 'log/' >> .fluentci/php/.gitignore",
         ])?
         .stdout()?;
     let pwd = dag().get_env("PWD")?;
@@ -47,7 +47,7 @@ pub fn setup() -> Result<String, Error> {
     if phpfpm_error_log_file.is_empty() {
         dag().set_envs(vec![(
             "PHPFPM_ERROR_LOG_FILE".into(),
-            format!("{}/.fluentci/log/php-fpm.error.log", pwd),
+            format!("{}/.fluentci/php/log/php-fpm.error.log", pwd),
         )])?;
     }
 
@@ -68,7 +68,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/php")?
         .with_exec(vec![
             "flox",
             "install",
@@ -169,15 +169,15 @@ pub fn setup() -> Result<String, Error> {
             "wget",
             "curl",
         ])?
-        .with_exec(vec!["cp ../composer.json ."])?
-        .with_exec(vec!["cp ../composer.lock ."])?
-        .with_exec(vec!["[ -f ../php.ini ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php.ini -O ../php.ini"])?
-        .with_exec(vec![r#"grep -q extension_dir ../php.ini || echo -e "\nextension_dir = \"$(ls -d .flox/run/*/lib/php/extensions)\"" >> ../php.ini"#])?
+        .with_exec(vec!["cp ../../composer.json ."])?
+        .with_exec(vec!["cp ../../composer.lock ."])?
+        .with_exec(vec!["[ -f ../../php.ini ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php.ini -O ../../php.ini"])?
+        .with_exec(vec![r#"grep -q extension_dir ../../php.ini || echo -e "\nextension_dir = \"$(ls -d .flox/run/*/lib/php/extensions)\"" >> ../../php.ini"#])?
         .with_exec(vec!["composer", "install"])?
-        .with_exec(vec!["rm -rf ../vendor && mv vendor .."])?
-        .with_exec(vec!["[ -f ../php-fpm.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
+        .with_exec(vec!["rm -rf ../../vendor && mv vendor ../.."])?
+        .with_exec(vec!["[ -f ../../php-fpm.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../../php-fpm.conf"])?
         .with_exec(vec![
-            "grep -q php-fpm Procfile || echo -e 'php-fpm: php-fpm -y ../php-fpm.conf --nodaemonize\\n' >> Procfile",
+            "grep -q php-fpm Procfile || echo -e 'php-fpm: php-fpm -y ../../php-fpm.conf --nodaemonize\\n' >> Procfile",
         ])?
         .stdout()?;
 

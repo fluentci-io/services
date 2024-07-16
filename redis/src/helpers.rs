@@ -4,7 +4,7 @@ use fluentci_pdk::dag;
 pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/redis"])?
         .stdout()?;
 
     let redis_port = dag().get_env("REDIS_PORT")?;
@@ -15,7 +15,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .pkgx()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/redis")?
         .with_packages(vec![
             "redis.io",
             "github.com/darthsim/overmind",

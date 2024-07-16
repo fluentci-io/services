@@ -36,7 +36,7 @@ use fluentci_pdk::dag;
 
 // ...
 
-dag().call("https://pkg.fluentci.io/mariadb@v0.1.2?wasm=1", "start", vec![])?;
+dag().call("https://pkg.fluentci.io/mariadb@v0.1.3?wasm=1", "start", vec![])?;
 ```
 
 ## 📚 Examples

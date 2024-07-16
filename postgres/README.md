@@ -36,7 +36,7 @@ use fluentci_pdk::dag;
 
 // ...
 
-dag().call("https://pkg.fluentci.io/postgres@v0.1.0?wasm=1", "start", vec![])?;
+dag().call("https://pkg.fluentci.io/postgres@v0.1.1?wasm=1", "start", vec![])?;
 ```
 
 ## 📚 Examples

@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/nsq"])?
         .stdout()?;
 
     let nsqlookupd_host = dag().get_env("NSQLOOKUPD_HOST")?;
@@ -33,7 +33,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/nsq")?
         .with_exec(vec![
             "flox",
             "install",

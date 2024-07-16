@@ -6,9 +6,10 @@ use fluentci_pdk::dag;
 pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/vault"])?
         .stdout()?;
 
+    let pwd = dag().get_env("PWD")?;
     let vault_port = dag().get_env("VAULT_PORT")?;
     let vault_addr = dag().get_env("VAULT_ADDR")?;
     let vault_data_dir = dag().get_env("VAULT_DATA_DIR")?;
@@ -27,7 +28,7 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if vault_data_dir.is_empty() {
-        dag().set_envs(vec![("VAULT_DATA_DIR".into(), "../data".into())])?;
+        dag().set_envs(vec![("VAULT_DATA_DIR".into(), format!("{}/data", pwd))])?;
     }
 
     if vault_disable_mlock.is_empty() {
@@ -40,7 +41,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .pkgx()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/vault")?
         .with_packages(vec![
             "vaultproject.io",
             "github.com/darthsim/overmind",
@@ -54,12 +55,12 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec!["type envsubst > /dev/null 2>/dev/null || pkgx install gnu.org/gettext"])?
         .with_exec(vec![
-            "[ -d ../data ] || mkdir -p ../data",
+            "[ -d $VAULT_DATA_DIR ] || mkdir -p $VAULT_DATA_DIR",
         ])?
         .with_exec(vec!["[ -f config.hcl.template ] || pkgx wget https://raw.githubusercontent.com/fluentci-io/services/main/vault/config.hcl.template"])?
-        .with_exec(vec!["[ -f ../config.hcl ] || flox activate -- sh -c \"envsubst < config.hcl.template\" > ../config.hcl "])?
+        .with_exec(vec!["[ -f ../../config.hcl ] || flox activate -- sh -c \"envsubst < config.hcl.template\" > ../../config.hcl "])?
         .with_exec(vec![
-            "grep -q vault: Procfile || echo -e 'vault: vault server -config=../config.hcl \\n' >> Procfile",
+            "grep -q vault: Procfile || echo -e 'vault: vault server -config=../../config.hcl \\n' >> Procfile",
         ])?
         .stdout()?;
 

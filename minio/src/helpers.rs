@@ -17,18 +17,18 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/minio"])?
         .stdout()?;
 
     let minio_dir = dag().get_env("MINIO_DIR")?;
 
     if minio_dir.is_empty() {
-        dag().set_envs(vec![("MINIO_DIR".into(), ".".into())])?;
+        dag().set_envs(vec![("MINIO_DIR".into(), "../..".into())])?;
     }
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/minio")?
         .with_exec(vec![
             "flox",
             "install",

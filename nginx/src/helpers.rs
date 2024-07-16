@@ -17,10 +17,15 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
-        .with_exec(vec!["mkdir", "-p", ".fluentci/logs", ".fluentci/temp"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/nginx"])?
         .with_exec(vec![
-            "grep -q logs .fluentci/.gitignore || echo -e 'logs\\ntemp' >> .fluentci/.gitignore",
+            "mkdir",
+            "-p",
+            ".fluentci/nginx/logs",
+            ".fluentci/nginx/temp",
+        ])?
+        .with_exec(vec![
+            "grep -q logs .fluentci/nginx/.gitignore || echo -e 'logs\\ntemp' >> .fluentci/nginx/.gitignore",
         ])?
         .stdout()?;
 
@@ -37,17 +42,17 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if nginx_web_root.is_empty() {
-        dag().set_envs(vec![("NGINX_WEB_ROOT".into(), "../".into())])?;
+        dag().set_envs(vec![("NGINX_WEB_ROOT".into(), "../../".into())])?;
     }
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/nginx")?
         .with_exec(vec!["flox", "install", "nginx", "overmind", "tmux", "wget", "curl", "gettext"])?
-        .with_exec(vec!["[ -f ../nginx.template ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/nginx.template -O ../nginx.template"])?
+        .with_exec(vec!["[ -f ../../nginx.template ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/nginx.template -O ../../nginx.template"])?
         .with_exec(vec!["[ -f fastcgi.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/fastcgi.conf"])?
-        .with_exec(vec!["[ -f ../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/web/index.html -O ../index.html"])?
-        .with_exec(vec!["[ -f ../nginx.template ] && flox activate -- sh -c \"envsubst < ../nginx.template\" > nginx.conf"])?
+        .with_exec(vec!["[ -f ../../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/web/index.html -O ../../index.html"])?
+        .with_exec(vec!["[ -f ../../nginx.template ] && flox activate -- sh -c \"envsubst < ../../nginx.template\" > nginx.conf"])?
         .with_exec(vec!["cat nginx.conf"])?
         .with_exec(vec![
             "grep -q nginx Procfile || echo -e 'nginx: nginx -p $PWD -c $PWD/nginx.conf -e error.log -g \"pid nginx.pid;daemon off;\"\\n' >> Procfile",

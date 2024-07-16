@@ -9,7 +9,7 @@ pub fn start(_args: String) -> FnResult<String> {
     let port = dag().get_env("PGPORT")?;
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/postgres")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["postgres", "--version"])?
         .with_exec(vec!["type", "overmind"])?
@@ -36,7 +36,7 @@ pub fn stop(args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/postgres")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
     Ok(stdout)

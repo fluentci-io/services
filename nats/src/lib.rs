@@ -11,7 +11,7 @@ pub fn start(_args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/nats")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "nats-server"])?
@@ -38,7 +38,7 @@ pub fn stop(args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/nats")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
     Ok(stdout)

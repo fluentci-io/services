@@ -17,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/dynamodb-local"])?
         .stdout()?;
 
     let dynamodb_port = dag().get_env("DYNAMODB_PORT")?;
@@ -33,7 +33,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/dynamodb-local")?
         .with_exec(vec![
             "[ -d $DYNAMODB_DATA_DIR ] || mkdir -p $DYNAMODB_DATA_DIR",
         ])?

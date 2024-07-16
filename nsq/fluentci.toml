@@ -7,5 +7,5 @@ keywords = [
   "nsq",
 ]
 license = "MIT"
-name = "dynamodb-local"
-version = "0.1.0"
+name = "nsq"
+version = "0.1.1"

@@ -4,7 +4,7 @@ use fluentci_pdk::dag;
 pub fn setup() -> Result<String, Error> {
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/mongodb"])?
         .stdout()?;
 
     let mongodb_data_dir = dag().get_env("MONGODB_DATA_DIR")?;
@@ -21,7 +21,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .pkgx()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/mongodb")?
         .with_exec(vec![
             "[ -d $MONGODB_DATA_DIR ] || mkdir -p $MONGODB_DATA_DIR",
         ])?

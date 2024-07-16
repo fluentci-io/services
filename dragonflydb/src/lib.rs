@@ -9,7 +9,7 @@ pub fn start(_args: String) -> FnResult<String> {
     let port = dag().get_env("DRAGONFLY_PORT")?;
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/dragonflydb")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["overmind start -f Procfile --daemonize || flox activate -- overmind restart dragonflydb"])?
@@ -31,7 +31,7 @@ pub fn stop(args: String) -> FnResult<String> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(".fluentci/dragonflydb")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
     Ok(stdout)

@@ -10,7 +10,7 @@ checksum = "b3d1d046238990b9cf5bcde22a3fb3584ee5cf65fb2765f454ed428c7a0063da"
 
 [[package]]
 name = "apache"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -50,7 +50,7 @@ checksum = "514de17de45fdb8dc022b1a7975556c53c86f9f0aa5f534b98977b171857c2c9"
 
 [[package]]
 name = "caddy"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -70,7 +70,7 @@ dependencies = [
 
 [[package]]
 name = "dragonflydb"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -80,7 +80,7 @@ dependencies = [
 
 [[package]]
 name = "dynamodb-local"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -96,7 +96,7 @@ checksum = "60b1af1c220855b6ceac025d3f6ecdd2b7c4894bfe9cd9bda4fbb4bc7c0d4cf0"
 
 [[package]]
 name = "elasticmq"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -122,7 +122,7 @@ checksum = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
 
 [[package]]
 name = "etcd"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -225,7 +225,7 @@ checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
 
 [[package]]
 name = "httpbin"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -283,7 +283,7 @@ dependencies = [
 
 [[package]]
 name = "mariadb"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -293,7 +293,7 @@ dependencies = [
 
 [[package]]
 name = "meilisearch"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -303,7 +303,7 @@ dependencies = [
 
 [[package]]
 name = "memcached"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -319,26 +319,6 @@ checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
 name = "minikube"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "extism-pdk",
- "fluentci-pdk",
- "fluentci-types",
-]
-
-[[package]]
-name = "minio"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "extism-pdk",
- "fluentci-pdk",
- "fluentci-types",
-]
-
-[[package]]
-name = "mongo"
 version = "0.1.1"
 dependencies = [
  "anyhow",
@@ -348,7 +328,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "mysql"
+name = "minio"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
+name = "mongo"
 version = "0.1.2"
 dependencies = [
  "anyhow",
@@ -358,8 +348,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "mysql"
+version = "0.1.3"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "nats"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -369,7 +369,7 @@ dependencies = [
 
 [[package]]
 name = "nginx"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -379,7 +379,7 @@ dependencies = [
 
 [[package]]
 name = "nsq"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -404,7 +404,7 @@ checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
 name = "php-fpm"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -414,7 +414,7 @@ dependencies = [
 
 [[package]]
 name = "postgres"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -485,7 +485,7 @@ dependencies = [
 
 [[package]]
 name = "rabbitmq"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -495,7 +495,7 @@ dependencies = [
 
 [[package]]
 name = "redis"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -583,7 +583,7 @@ checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
 name = "stripe-mock"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -604,7 +604,7 @@ dependencies = [
 
 [[package]]
 name = "temporal"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -631,7 +631,7 @@ dependencies = [
 
 [[package]]
 name = "typesense"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "extism-pdk",
@@ -653,7 +653,7 @@ checksum = "673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861"
 
 [[package]]
 name = "vault"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "extism-pdk",
