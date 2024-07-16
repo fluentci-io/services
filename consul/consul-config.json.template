@@ -1,0 +1,12 @@
+{
+  "server": true,
+  "bind_addr": "$CONSUL_BIND_ADDR",
+  "bootstrap_expect": 1,
+  "data_dir": "$CONSUL_DATA_DIR",
+  "ui_config": {
+    "enabled": true
+  },
+  "ports": {
+    "http": $CONSUL_HTTP_PORT
+  }
+}

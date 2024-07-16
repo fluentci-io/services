@@ -2,6 +2,7 @@
 default-members = [
   "apache",
   "caddy",
+  "consul",
   "dragonflydb",
   "dynamodb-local",
   "elasticmq",
@@ -29,6 +30,7 @@ default-members = [
 members = [
   "apache",
   "caddy",
+  "consul",
   "dragonflydb",
   "dynamodb-local",
   "elasticmq",

@@ -1,0 +1,12 @@
+{
+  "server": true,
+  "bind_addr": "127.0.0.1",
+  "bootstrap_expect": 1,
+  "data_dir": "./consul-data",
+  "ui_config": {
+    "enabled": true
+  },
+  "ports": {
+    "http": 8500
+  }
+}

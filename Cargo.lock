@@ -59,6 +59,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "consul"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "dragonflydb"
 version = "0.1.0"
 dependencies = [
