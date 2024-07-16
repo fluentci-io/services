@@ -43,7 +43,7 @@ pub fn setup() -> Result<String, Error> {
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci")?
-        .with_exec(vec!["flox", "install", "nginx", "overmind", "tmux", "wget", "curl"])?
+        .with_exec(vec!["flox", "install", "nginx", "overmind", "tmux", "wget", "curl", "gettext"])?
         .with_exec(vec!["[ -f ../nginx.template ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/nginx.template -O ../nginx.template"])?
         .with_exec(vec!["[ -f fastcgi.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/fastcgi.conf"])?
         .with_exec(vec!["[ -f ../index.html ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/nginx/web/index.html -O ../index.html"])?

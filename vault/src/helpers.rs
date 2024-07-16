@@ -52,13 +52,14 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec![
             "type jq > /dev/null 2>/dev/null || pkgx install jq",
         ])?
+        .with_exec(vec!["type envsubst > /dev/null 2>/dev/null || pkgx install gnu.org/gettext"])?
         .with_exec(vec![
             "[ -d ../data ] || mkdir -p ../data",
         ])?
         .with_exec(vec!["[ -f config.hcl.template ] || pkgx wget https://raw.githubusercontent.com/fluentci-io/services/main/vault/config.hcl.template"])?
         .with_exec(vec!["[ -f ../config.hcl ] || envsubst < config.hcl.template > ../config.hcl "])?
         .with_exec(vec![
-            "grep -q vault Procfile || echo -e 'vault: vault server -config=../config.hcl \\n' >> Procfile",
+            "grep -q vault: Procfile || echo -e 'vault: vault server -config=../config.hcl \\n' >> Procfile",
         ])?
         .stdout()?;
 

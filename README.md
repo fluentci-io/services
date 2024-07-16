@@ -39,6 +39,7 @@ fluentci run --wasm postgres start
 | [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached |
 | [dynamodb-local](./dynamodb-local) | A local version of Amazon DynamoDB |
 | [elasticmq](./elasticmq/) | A message queue system with the same semantics as Amazon SQS |
+| [envconsul](./envconsul)     | A tool that manages environment variables using HashiCorp Consul |
 | [etcd](./etcd)               | A distributed key-value store |
 | [httpbin](./httpbin)         | HTTP Request & Response Service |
 | [mariadb](./mariadb)         | The open source relational database |

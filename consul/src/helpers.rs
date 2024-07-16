@@ -48,12 +48,12 @@ pub fn setup() -> Result<String, Error> {
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec![
-            "flox", "install", "consul", "overmind", "tmux", "wget"
+            "flox", "install", "consul", "overmind", "tmux", "wget", "gettext"
         ])?
         .with_exec(vec!["[ -f consul-config.json.template ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/consul/consul-config.json.template"])?
         .with_exec(vec!["[ -f $CONSUL_CONFIG ] || envsubst < consul-config.json.template > $CONSUL_CONFIG "])?
         .with_exec(vec![
-            "grep -q consul Procfile || echo -e 'consul: consul agent -config-file=$CONSUL_CONFIG \\n' >> Procfile",
+            "grep -q consul: Procfile || echo -e 'consul: consul agent -config-file=$CONSUL_CONFIG \\n' >> Procfile",
         ])?
         .stdout()?;
 
