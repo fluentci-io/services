@@ -10,14 +10,14 @@ pub fn start(_args: String) -> FnResult<String> {
     let port = dag().get_env("CONSUL_HTTP_PORT")?;
 
     let stdout = dag()
-        .flox()?
-        .with_workdir(".fluentci")?
+        .pkgx()?
+        .with_workdir(".fluentci/consul")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["consul", "version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "consul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart consul",
+            "overmind start -f Procfile --daemonize || overmind restart consul",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
@@ -39,8 +39,8 @@ pub fn stop(args: String) -> FnResult<String> {
     };
 
     let stdout = dag()
-        .flox()?
-        .with_workdir(".fluentci")?
+        .pkgx()?
+        .with_workdir(".fluentci/consul")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
     Ok(stdout)

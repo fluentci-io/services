@@ -1,23 +1,10 @@
 use anyhow::Error;
 use fluentci_pdk::dag;
 
-pub fn setup_flox() -> Result<(), Error> {
-    let os = dag().get_os()?;
-    if os == "macos" {
-        dag()
-        .pipeline("setup-flox")?
-        .with_exec(vec![r#"type brew > /dev/null 2> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""#])?
-        .with_exec(vec!["type flox > /dev/null 2> /dev/null || brew install flox"])?
-        .stdout()?;
-    }
-    Ok(())
-}
-
 pub fn setup() -> Result<String, Error> {
-    setup_flox()?;
     dag()
         .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
+        .with_exec(vec!["mkdir", "-p", ".fluentci/consul"])?
         .stdout()?;
 
     let consul_config = dag().get_env("CONSUL_CONFIG")?;
@@ -30,7 +17,7 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if consul_data_dir.is_empty() {
-        dag().set_envs(vec![("CONSUL_DATA_DIR".into(), "../consul-data".into())])?;
+        dag().set_envs(vec![("CONSUL_DATA_DIR".into(), "../../consul-data".into())])?;
     }
 
     if consul_bind_addr.is_empty() {
@@ -40,18 +27,21 @@ pub fn setup() -> Result<String, Error> {
     if consul_config.is_empty() {
         dag().set_envs(vec![(
             "CONSUL_CONFIG".into(),
-            "../consul-config.json".into(),
+            "../../consul-config.json".into(),
         )])?;
     }
 
     let stdout = dag()
-        .flox()?
-        .with_workdir(".fluentci")?
-        .with_exec(vec![
-            "flox", "install", "consul", "overmind", "tmux", "wget", "gettext"
+        .pkgx()?
+        .with_workdir(".fluentci/consul")?
+        .with_packages(vec![
+           "consul.io",
+            "hashicorp.com/envconsul",
+            "github.com/darthsim/overmind",
+            "github.com/tmux/tmux",
         ])?
-        .with_exec(vec!["[ -f consul-config.json.template ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/consul/consul-config.json.template"])?
-        .with_exec(vec!["[ -f $CONSUL_CONFIG ] || flox activate -- sh -c \"envsubst < consul-config.json.template\" > $CONSUL_CONFIG "])?
+        .with_exec(vec!["[ -f consul-config.json.template ] || pkgx wget https://raw.githubusercontent.com/fluentci-io/services/main/consul/consul-config.json.template"])?
+        .with_exec(vec!["[ -f $CONSUL_CONFIG ] || pkgx envsubst < consul-config.json.template > $CONSUL_CONFIG "])?
         .with_exec(vec![
             "grep -q consul: Procfile || echo -e 'consul: consul agent -config-file=$CONSUL_CONFIG \\n' >> Procfile",
         ])?
