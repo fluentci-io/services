@@ -18,7 +18,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "overmind start -f Procfile --daemonize || flox activate -- overmind quit",
         ])?
         .with_exec(vec![
-            "[ -f ./.overmind.sock ] || flox activate -- overmind start -f Procfile --daemonize",
+            "[ -S ./.overmind.sock ] || flox activate -- overmind start -f Procfile --daemonize",
         ])?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["sleep", "2"])?
