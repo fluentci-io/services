@@ -15,11 +15,11 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "envconsul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart envconsul",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart envconsul",
         ])?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["sleep", "2"])?
-        .with_exec(vec!["cat", "envconsul.log"])?
+        .with_exec(vec!["envconsul -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP"])?
         .stdout()?;
     Ok(stdout)
 }
@@ -29,7 +29,7 @@ pub fn stop(args: String) -> FnResult<String> {
     helpers::setup()?;
 
     let args = if args.is_empty() {
-        "consul".to_string()
+        "envconsul".to_string()
     } else {
         args
     };

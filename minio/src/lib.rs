@@ -15,7 +15,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "minio"])?
         .with_exec(vec!["minio", "--version"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart minio",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart minio",
         ])?
         .wait_on(9000, None)?
         .with_exec(vec!["overmind", "status"])?

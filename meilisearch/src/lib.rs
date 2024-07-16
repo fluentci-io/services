@@ -15,7 +15,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "meilisearch"])?
         .with_exec(vec!["echo -e \"Meilisearch starting on port $MEILI_PORT\""])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart meilisearch",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart meilisearch",
         ])?
         .with_exec(vec![
             "pkgx",

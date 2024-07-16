@@ -16,7 +16,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["etcd", "--version"])?
         .with_exec(vec!["echo -e \"etcd starting on port 2379\""])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart etcd",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart etcd",
         ])?
         .wait_on(2379, None)?
         .with_exec(vec!["overmind", "status"])?

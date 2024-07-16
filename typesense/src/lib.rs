@@ -16,7 +16,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "echo -e \"Typesense starting on port $TYPESENSE_API_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart typesense",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart typesense",
         ])?
         .with_exec(vec![
             "pkgx",

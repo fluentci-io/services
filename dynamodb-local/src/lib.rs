@@ -20,7 +20,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "echo -e \"DynamoDB Local starting on port $DYNAMODB_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart dynamodb",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart dynamodb",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?

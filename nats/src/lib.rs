@@ -18,7 +18,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["nats-server", "--version"])?
         .with_exec(vec!["echo -e \"Nats server starting on port $NATS_PORT\""])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart nats",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart nats",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?

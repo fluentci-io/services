@@ -20,7 +20,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "echo -e \"Memcached starting on port $MEMCACHED_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart memcached",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart memcached",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?

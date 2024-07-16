@@ -34,7 +34,10 @@ pub fn setup() -> Result<String, Error> {
     }
 
     if app.is_empty() {
-        dag().set_envs(vec![("ENVCONSUL_APP".into(), "env".into())])?;
+        dag().set_envs(vec![(
+            "ENVCONSUL_APP".into(),
+            "pkgx bunx serve -p $port".into(),
+        )])?;
     }
 
     let stdout = dag()
@@ -44,10 +47,10 @@ pub fn setup() -> Result<String, Error> {
             "flox", "install", "envconsul", "overmind", "tmux"
         ])?
         .with_exec(vec!["consul", "kv", "put", "my-app/address", "1.2.3.4"])?
-        .with_exec(vec!["consul", "kv", "put", "my-app/port", "80"])?
+        .with_exec(vec!["consul", "kv", "put", "my-app/port", "4000"])?
         .with_exec(vec!["consul", "kv", "put", "my-app/max_conns", "5"])?
         .with_exec(vec![
-            "grep -q envconsul: Procfile || echo -e 'envconsul: envconsul -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP > envconsul.log \\n' >> Procfile",
+            "grep -q envconsul: Procfile || echo -e 'envconsul: envconsul -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile",
         ])?
         .stdout()?;
 
