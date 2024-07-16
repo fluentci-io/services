@@ -57,7 +57,7 @@ pub fn setup() -> Result<String, Error> {
             "[ -d ../data ] || mkdir -p ../data",
         ])?
         .with_exec(vec!["[ -f config.hcl.template ] || pkgx wget https://raw.githubusercontent.com/fluentci-io/services/main/vault/config.hcl.template"])?
-        .with_exec(vec!["[ -f ../config.hcl ] || envsubst < config.hcl.template > ../config.hcl "])?
+        .with_exec(vec!["[ -f ../config.hcl ] || flox activate -- sh -c \"envsubst < config.hcl.template\" > ../config.hcl "])?
         .with_exec(vec![
             "grep -q vault: Procfile || echo -e 'vault: vault server -config=../config.hcl \\n' >> Procfile",
         ])?

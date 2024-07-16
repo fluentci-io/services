@@ -171,11 +171,11 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec!["cp ../composer.json ."])?
         .with_exec(vec!["cp ../composer.lock ."])?
-        .with_exec(vec!["[ -f ../php.ini ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php.ini -O ../php.ini"])?
+        .with_exec(vec!["[ -f ../php.ini ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php.ini -O ../php.ini"])?
         .with_exec(vec![r#"grep -q extension_dir ../php.ini || echo -e "\nextension_dir = \"$(ls -d .flox/run/*/lib/php/extensions)\"" >> ../php.ini"#])?
         .with_exec(vec!["composer", "install"])?
         .with_exec(vec!["rm -rf ../vendor && mv vendor .."])?
-        .with_exec(vec!["[ -f ../php-fpm.conf ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
+        .with_exec(vec!["[ -f ../php-fpm.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/php/php-fpm.conf -O ../php-fpm.conf"])?
         .with_exec(vec![
             "grep -q php-fpm Procfile || echo -e 'php-fpm: php-fpm -y ../php-fpm.conf --nodaemonize\\n' >> Procfile",
         ])?

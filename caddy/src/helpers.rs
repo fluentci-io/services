@@ -51,8 +51,8 @@ pub fn setup() -> Result<String, Error> {
         .flox()?
         .with_workdir(".fluentci")?
         .with_exec(vec!["flox", "install", "caddy", "overmind", "tmux", "wget", "curl"])?
-        .with_exec(vec!["[ -f ../Caddyfile ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/Caddyfile -O ../Caddyfile"])?
-        .with_exec(vec!["[ -f ../index.html ] || wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/web/index.html -O ../index.html"])?
+        .with_exec(vec!["[ -f ../Caddyfile ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/Caddyfile -O ../Caddyfile"])?
+        .with_exec(vec!["[ -f ../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/caddy/web/index.html -O ../index.html"])?
         .with_exec(vec![
             &format!("grep -q caddy Procfile || echo -e 'caddy: cd .. && caddy run {}\\n' >> Procfile", opts),
         ])?
