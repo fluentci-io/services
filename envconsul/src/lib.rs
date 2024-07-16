@@ -7,18 +7,19 @@ pub mod helpers;
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
 
+    let prefix = dag().get_env("ENVCONSUL_PREFIX")?;
+    let workdir = format!(".fluentci/{}", prefix);
+
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(&workdir)?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["envconsul", "-version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "envconsul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind quit",
-        ])?
-        .with_exec(vec![
-            "[ -S ./.overmind.sock ] || flox activate -- overmind start -f Procfile --daemonize",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart",
+            &prefix,
         ])?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["sleep", "2"])?
@@ -30,19 +31,16 @@ pub fn start(_args: String) -> FnResult<String> {
 }
 
 #[plugin_fn]
-pub fn stop(args: String) -> FnResult<String> {
+pub fn stop(_args: String) -> FnResult<String> {
     helpers::setup()?;
 
-    let args = if args.is_empty() {
-        "envconsul".to_string()
-    } else {
-        args
-    };
+    let prefix = dag().get_env("ENVCONSUL_PREFIX")?;
+    let workdir = format!(".fluentci/{}", prefix);
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
-        .with_exec(vec!["overmind", "stop", &args])?
+        .with_workdir(&workdir)?
+        .with_exec(vec!["overmind", "stop", &prefix])?
         .stdout()?;
     Ok(stdout)
 }

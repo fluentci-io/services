@@ -21,17 +21,20 @@ pub fn setup() -> Result<String, Error> {
         vec![],
     )?;
 
-    dag()
-        .pipeline("setup")?
-        .with_exec(vec!["mkdir", "-p", ".fluentci"])?
-        .stdout()?;
-
     let prefix = dag().get_env("ENVCONSUL_PREFIX")?;
-    let app = dag().get_env("ENVCONSUL_APP")?;
-
     if prefix.is_empty() {
         dag().set_envs(vec![("ENVCONSUL_PREFIX".into(), "my-app".into())])?;
     }
+    let prefix = dag().get_env("ENVCONSUL_PREFIX")?;
+
+    let workdir = format!(".fluentci/{}", prefix);
+
+    dag()
+        .pipeline("setup")?
+        .with_exec(vec!["mkdir", "-p", &workdir])?
+        .stdout()?;
+
+    let app = dag().get_env("ENVCONSUL_APP")?;
 
     if app.is_empty() {
         dag().set_envs(vec![(
@@ -42,7 +45,7 @@ pub fn setup() -> Result<String, Error> {
 
     let stdout = dag()
         .flox()?
-        .with_workdir(".fluentci")?
+        .with_workdir(&workdir)?
         .with_exec(vec![
             "flox", "install", "envconsul", "overmind", "tmux"
         ])?
@@ -50,7 +53,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/port", "4000"])?
         .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/max_conns", "5"])?
         .with_exec(vec![
-            "grep -q envconsul: Procfile || echo -e 'envconsul: envconsul -upcase $ENVCONSUL_OPTIONS -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile",
+            &format!("grep -q {}: Procfile || echo -e 'envconsul: envconsul -upcase $ENVCONSUL_OPTIONS -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile", prefix),
         ])?
         .stdout()?;
 
