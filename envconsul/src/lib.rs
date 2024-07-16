@@ -19,7 +19,9 @@ pub fn start(_args: String) -> FnResult<String> {
         ])?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["sleep", "2"])?
-        .with_exec(vec!["envconsul -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP"])?
+        .with_exec(vec![
+            "envconsul -pristine -upcase -prefix $ENVCONSUL_PREFIX env",
+        ])?
         .stdout()?;
     Ok(stdout)
 }

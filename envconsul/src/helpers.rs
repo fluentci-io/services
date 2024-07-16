@@ -16,7 +16,7 @@ pub fn setup_flox() -> Result<(), Error> {
 pub fn setup() -> Result<String, Error> {
     setup_flox()?;
     dag().call(
-        "https://pkg.fluentci.io/consul@v0.1.0?wasm=1",
+        "https://pkg.fluentci.io/consul@v0.1.1?wasm=1",
         "start",
         vec![],
     )?;
@@ -36,7 +36,7 @@ pub fn setup() -> Result<String, Error> {
     if app.is_empty() {
         dag().set_envs(vec![(
             "ENVCONSUL_APP".into(),
-            "pkgx bunx serve -p $port".into(),
+            "pkgx bunx serve -p $PORT".into(),
         )])?;
     }
 
@@ -46,11 +46,11 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec![
             "flox", "install", "envconsul", "overmind", "tmux"
         ])?
-        .with_exec(vec!["consul", "kv", "put", "my-app/address", "1.2.3.4"])?
-        .with_exec(vec!["consul", "kv", "put", "my-app/port", "4000"])?
-        .with_exec(vec!["consul", "kv", "put", "my-app/max_conns", "5"])?
+        .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/address", "1.2.3.4"])?
+        .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/port", "4000"])?
+        .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/max_conns", "5"])?
         .with_exec(vec![
-            "grep -q envconsul: Procfile || echo -e 'envconsul: envconsul -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile",
+            "grep -q envconsul: Procfile || echo -e 'envconsul: envconsul -upcase $ENVCONSUL_OPTIONS -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile",
         ])?
         .stdout()?;
 

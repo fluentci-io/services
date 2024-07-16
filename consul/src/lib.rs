@@ -17,7 +17,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "consul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || overmind restart consul",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind restart consul",
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
