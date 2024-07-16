@@ -1,0 +1,12 @@
+ storage "file" {
+  path = "$VAULT_DATA_DIR"
+}
+
+listener "tcp" {
+  address     = "$VAULT_ADDR"
+  tls_disable = "true"
+}
+
+disable_mlock      = "$VAULT_DISABLE_MLOCK"
+disable_clustering = "$VAULT_DISABLE_CLUSTERING"
+ui                 = "$VAULT_ENABLE_UI"

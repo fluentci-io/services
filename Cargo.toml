@@ -24,6 +24,7 @@ default-members = [
   "stripe-mock",
   "temporal",
   "typesense",
+  "vault",
 ]
 members = [
   "apache",
@@ -50,5 +51,6 @@ members = [
   "stripe-mock",
   "temporal",
   "typesense",
+  "vault",
 ]
 resolver = "2"
