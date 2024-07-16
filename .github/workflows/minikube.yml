@@ -8,9 +8,6 @@ on:
       - .github/workflows/minikube.yml
 jobs:
   minikube-test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-12]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
