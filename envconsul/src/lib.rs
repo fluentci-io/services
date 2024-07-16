@@ -11,14 +11,14 @@ pub fn start(_args: String) -> FnResult<String> {
     let workdir = format!(".fluentci/{}", prefix);
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(&workdir)?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["envconsul", "-version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "envconsul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart",
+            "overmind start -f Procfile --daemonize || overmind restart",
             &prefix,
         ])?
         .with_exec(vec!["overmind", "status"])?
@@ -38,7 +38,7 @@ pub fn stop(_args: String) -> FnResult<String> {
     let workdir = format!(".fluentci/{}", prefix);
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(&workdir)?
         .with_exec(vec!["overmind", "stop", &prefix])?
         .stdout()?;
