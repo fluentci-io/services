@@ -8,7 +8,10 @@ on:
       - .github/workflows/minikube.yml
 jobs:
   minikube-test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Fluent CI
@@ -23,8 +26,15 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove preinstalled minikube
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
           sudo rm /usr/local/bin/minikube
+      - name: Setup Docker
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          brew install docker lima
+          limactl start template://docker
+          docker context create lima-docker --docker "host=unix:///Users/runner/.lima/docker/sock/docker.sock
       - name: Start minikube server
         run: |
           fluentci run target/wasm32-unknown-unknown/release/minikube.wasm start
