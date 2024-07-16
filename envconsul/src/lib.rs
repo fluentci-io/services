@@ -15,7 +15,10 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "envconsul"])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart envconsul",
+            "overmind start -f Procfile --daemonize || flox activate -- overmind quit",
+        ])?
+        .with_exec(vec![
+            "[ -f ./.overmind.sock ] || flox activate -- overmind start -f Procfile --daemonize",
         ])?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["sleep", "2"])?
