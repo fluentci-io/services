@@ -2,11 +2,11 @@
 authors = [
   "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
-description = "Envconsul Plugin for FluentCI"
+description = "Consul Template Plugin for FluentCI"
 keywords = [
-  "envconsul",
+  "consul-template",
   "consul",
 ]
 license = "MIT"
-name = "envconsul"
-version = "0.1.1"
+name = "consul-template"
+version = "0.1.0"

@@ -1,0 +1,17 @@
+consul {
+  address = "127.0.0.1:8500"
+}
+
+log_level = "warn"
+
+template {
+  contents = <<EOF
+  {{key "$CONSUL_APP_PREFIX/address"}}
+  {{key "$CONSUL_APP_PREFIX/port"}}
+  {{key "$CONSUL_APP_PREFIX/max_conns"}}
+  EOF
+  destination = "$CONSUL_APP_CONFIG"
+  exec {
+    command = "$CONSUL_APP"
+  }
+}

@@ -43,7 +43,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/port", "4000"])?
         .with_exec(vec!["consul", "kv", "put", "$ENVCONSUL_PREFIX/max_conns", "5"])?
         .with_exec(vec![
-            &format!("grep -q {}: Procfile || echo -e 'envconsul: envconsul -upcase $ENVCONSUL_OPTIONS -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile", prefix),
+            &format!("grep -q {}: Procfile || echo -e '{}: envconsul -upcase $ENVCONSUL_OPTIONS -prefix $ENVCONSUL_PREFIX $ENVCONSUL_APP \\n' >> Procfile", prefix, prefix),
         ])?
         .stdout()?;
 
