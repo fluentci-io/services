@@ -1,24 +1,73 @@
 use anyhow::Error;
 use fluentci_pdk::dag;
 
-pub fn setup_flox() -> Result<(), Error> {
+pub fn install_cockroachdb() -> Result<(), Error> {
     let os = dag().get_os()?;
-    if os == "macos" {
-        dag()
-        .pipeline("setup-flox")?
-        .with_exec(vec![r#"type brew > /dev/null 2> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""#])?
-        .with_exec(vec!["type flox > /dev/null 2> /dev/null || brew install flox"])?
-        .stdout()?;
+    let arch = dag().get_arch()?;
+
+    let os = match os.as_str() {
+        "linux" => "linux",
+        "macos" => "darwin",
+        _ => &os,
+    };
+    let arch = match arch.as_str() {
+        "x86_64" => "amd64",
+        "aarch64" => "arm64",
+        _ => &arch,
+    };
+    dag().set_envs(vec![("OS".into(), os.into()), ("ARCH".into(), arch.into())])?;
+
+    let version = dag().get_env("COCKROACH_VERSION")?;
+    if version.is_empty() {
+        dag().set_envs(vec![("COCKROACH_VERSION".into(), "v24.1.2".into())])?;
     }
+
+    dag()
+        .pkgx()?
+        .with_workdir(".fluentci")?
+        .with_exec(vec![
+            "type cockroach > /dev/null 2> /dev/null || ",
+            "pkgx",
+            "wget",
+            "https://binaries.cockroachdb.com/cockroach-$COCKROACH_VERSION.$OS-$ARCH.tgz",
+        ])?
+        .with_exec(vec![
+            "type cockroach > /dev/null 2> /dev/null || ",
+            "tar",
+            "-xvzf",
+            "cockroach-$COCKROACH_VERSION.$OS-$ARCH.tgz",
+        ])?
+        .with_exec(vec![
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "mv",
+            "cockroach-$COCKROACH_VERSION.$OS-$ARCH/cockroach",
+            "$HOME/.local/bin",
+        ])?
+        .with_exec(vec!["mkdir", "-p", "$HOME/.local/lib"])?
+        .with_exec(vec![
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "mv",
+            "cockroach-$COCKROACH_VERSION.$OS-$ARCH/lib/*",
+            "$HOME/.local/lib",
+        ])?
+        .with_exec(vec![
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "rm",
+            "-rf",
+            "cockroach-$COCKROACH_VERSION.$OS-$ARCH*",
+        ])?
+        .stdout()?;
+
     Ok(())
 }
 
 pub fn setup() -> Result<String, Error> {
-    setup_flox()?;
     dag()
         .pipeline("setup")?
         .with_exec(vec!["mkdir", "-p", ".fluentci/cockroachdb"])?
         .stdout()?;
+
+    install_cockroachdb()?;
 
     let cockroach_port = dag().get_env("COCKROACH_PORT")?;
     let cockroach_host = dag().get_env("COCKROACH_HOST")?;
@@ -51,18 +100,15 @@ pub fn setup() -> Result<String, Error> {
     }
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci/cockroachdb")?
-        .with_exec(vec![
-            "flox",
-            "install",
-            "cockroachdb-bin",
-            "overmind",
-            "tmux",
+        .with_packages(vec![
+            "github.com/darthsim/overmind",
+            "github.com/tmux/tmux",
         ])?
         .with_exec(vec!["[ -d $COCKROACH_DATA ] || mkdir -p $COCKROACH_DATA"])?
         .with_exec(vec![
-            "grep -q cockroachdb Procfile || echo -e 'cockroachdb: cockroachdb  start-single-node --insecure --listen-addr=$COCKROACH_HOST:$COCKROACH_PORT --http-addr=$COCKROACH_DATA --store=path=$COCKROACH_DATA \\n' >> Procfile",
+            "grep -q cockroachdb: Procfile || echo -e 'cockroachdb: cockroach  start-single-node --insecure --listen-addr=$COCKROACH_HOST:$COCKROACH_PORT --http-addr=$COCKROACH_DATA --store=path=$COCKROACH_DATA \\n' >> Procfile",
         ])?
         .stdout()?;
 

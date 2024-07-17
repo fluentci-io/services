@@ -11,7 +11,7 @@ pub fn start(_args: String) -> FnResult<String> {
     let http_port = dag().get_env("COCKROACH_HTTP_PORT")?;
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci/cockroachdb")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
@@ -21,7 +21,7 @@ pub fn start(_args: String) -> FnResult<String> {
             "echo -e \"Cockroachdb starting on port $COCKROACH_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart cockroachdb",
+            "overmind start -f Procfile --daemonize || overmind restart cockroachdb",
         ])?
         .wait_on(port.parse()?, None)?
         .wait_on(http_port.parse()?, None)?
@@ -41,7 +41,7 @@ pub fn stop(args: String) -> FnResult<String> {
     };
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci/cockroachdb")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
