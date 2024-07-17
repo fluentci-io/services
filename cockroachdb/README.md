@@ -1,4 +1,4 @@
-# Memcached Plugin
+# CockroachDB Plugin
 
 [![fluentci pipeline](https://shield.fluentci.io/x/cockroachdb)](https://pkg.fluentci.io/cockroachdb)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/cockroachdb.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/cockroachdb.yml)

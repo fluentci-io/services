@@ -15,6 +15,16 @@ pub fn install_cockroachdb() -> Result<(), Error> {
         "aarch64" => "arm64",
         _ => &arch,
     };
+
+    let arch = match os {
+        "darwin" => match arch {
+            "amd64" => "10.9-amd64",
+            "arm64" => "11.0-arm64",
+            _ => arch,
+        },
+        _ => arch,
+    };
+
     dag().set_envs(vec![("OS".into(), os.into()), ("ARCH".into(), arch.into())])?;
 
     let version = dag().get_env("COCKROACH_VERSION")?;
@@ -38,23 +48,26 @@ pub fn install_cockroachdb() -> Result<(), Error> {
             "cockroach-$COCKROACH_VERSION.$OS-$ARCH.tgz",
         ])?
         .with_exec(vec![
-            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] && ",
             "mv",
             "cockroach-$COCKROACH_VERSION.$OS-$ARCH/cockroach",
             "$HOME/.local/bin",
+            " || true",
         ])?
         .with_exec(vec!["mkdir", "-p", "$HOME/.local/lib"])?
         .with_exec(vec![
-            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH/lib ] && ",
             "mv",
             "cockroach-$COCKROACH_VERSION.$OS-$ARCH/lib/*",
             "$HOME/.local/lib",
+            " || true",
         ])?
         .with_exec(vec![
-            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] || ",
+            "[ -d cockroach-$COCKROACH_VERSION.$OS-$ARCH ] && ",
             "rm",
             "-rf",
             "cockroach-$COCKROACH_VERSION.$OS-$ARCH*",
+            " || true",
         ])?
         .stdout()?;
 
@@ -108,7 +121,7 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec!["[ -d $COCKROACH_DATA ] || mkdir -p $COCKROACH_DATA"])?
         .with_exec(vec![
-            "grep -q cockroachdb: Procfile || echo -e 'cockroachdb: cockroach  start-single-node --insecure --listen-addr=$COCKROACH_HOST:$COCKROACH_PORT --http-addr=$COCKROACH_DATA --store=path=$COCKROACH_DATA \\n' >> Procfile",
+            "grep -q cockroachdb: Procfile || echo -e 'cockroachdb: cockroach  start-single-node --insecure --listen-addr=$COCKROACH_HOST:$COCKROACH_PORT --http-addr=$COCKROACH_HTTP_HOST:$COCKROACH_HTTP_PORT --store=path=$COCKROACH_DATA \\n' >> Procfile",
         ])?
         .stdout()?;
 

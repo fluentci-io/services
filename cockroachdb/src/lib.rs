@@ -15,8 +15,8 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_workdir(".fluentci/cockroachdb")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["type", "cockroachdb"])?
-        .with_exec(vec!["cockroachdb", "version"])?
+        .with_exec(vec!["type", "cockroach"])?
+        .with_exec(vec!["cockroach", "version"])?
         .with_exec(vec![
             "echo -e \"Cockroachdb starting on port $COCKROACH_PORT\"",
         ])?
