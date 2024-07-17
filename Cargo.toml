@@ -2,6 +2,7 @@
 default-members = [
   "apache",
   "caddy",
+  "cockroachdb",
   "consul",
   "dragonflydb",
   "dynamodb-local",
@@ -31,6 +32,7 @@ default-members = [
 members = [
   "apache",
   "caddy",
+  "cockroachdb",
   "consul",
   "dragonflydb",
   "dynamodb-local",

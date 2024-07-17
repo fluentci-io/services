@@ -2,7 +2,7 @@
   <img src="./.github/assets/banner.png">
 </p>
 
-![MIT License](https://img.shields.io/badge/license-MIT-green.svg)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![discord](https://img.shields.io/discord/1132020671262773358?label=discord&logo=discord&color=5865F2)](https://discord.gg/V4U6dPskKc)
 
 This repository contains the source code for [FluentCI](https://fluentci.io) services.
@@ -35,6 +35,7 @@ fluentci run --wasm postgres start
 |------------------------------|--------------------|
 | [apache](./apache)           | A powerful and flexible HTTP/1.1 compliant web server |
 | [caddy](./caddy)             | Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS  |
+| [cockroachdb](./cockroachdb) | A distributed SQL database built on a transactional and strongly-consistent key-value store |
 | [consul](./consul)           | A distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure |
 | [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached |
 | [dynamodb-local](./dynamodb-local) | A local version of Amazon DynamoDB |
