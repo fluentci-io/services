@@ -6,7 +6,7 @@ description = "Consul Template plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "consul-template"
-version = "0.1.0"
+version = "0.1.1"
 
 [lib]
 crate-type = [
