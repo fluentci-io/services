@@ -1,0 +1,38 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - daemon/**
+      - .github/workflows/daemon.yml
+jobs:
+  daemon-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Fluent CI
+        uses: fluentci-io/setup-fluentci@v5
+        with:
+          wasm: true
+          plugin: rust
+          args: |
+            target_add wasm32-unknown-unknown
+            build --release --target wasm32-unknown-unknown
+          working-directory: daemon
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start daemon
+        run: |
+          fluentci run target/wasm32-unknown-unknown/release/daemon.wasm start demo pkgx bunx serve -p 4000
+          pkgx deno run -A npm:wait-port 4000
+          pkgx http http://localhost:4000
+          fluentci run target/wasm32-unknown-unknown/release/daemon.wasm stop demo
+          curl -s http://localhost:4000 || true
+        working-directory: daemon
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}

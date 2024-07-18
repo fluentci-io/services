@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Service daemon Plugin for FluentCI"
+keywords = [
+  "daemon",
+]
+license = "MIT"
+name = "daemon"
+version = "0.1.0"
