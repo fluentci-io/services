@@ -50,5 +50,5 @@ Github Actions:
     wasm: true
     plugin: daemon
     args: |
-      start demo dpkgx bunx serve -p 4000
+      start demo pkgx bunx serve -p 4000
 ```
