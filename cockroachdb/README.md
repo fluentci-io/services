@@ -10,7 +10,7 @@ CockroachDB service plugin for FluentCI.
 Add the following command to your CI configuration file:
 
 ```bash
-fluentci run --wasm memcached start
+fluentci run --wasm cockroachdb start
 ```
 
 ## Functions

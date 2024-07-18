@@ -1,0 +1,14 @@
+logger:
+  level: warning
+  console: 1
+tcp_port: $CLICKHOUSE_PORT
+http_port: $CLICKHOUSE_HTTP_PORT
+default_profile: default
+default_database: default
+path: $CLICKHOUSE_DATADIR
+tmp_path: $CLICKHOUSE_DATADIR/tmp
+user_files_path: $CLICKHOUSE_DATADIR/user_files
+format_schema_path: $CLICKHOUSE_DATADIR/format_schemas
+user_directories:
+  users_xml:
+    path: $CLICKHOUSE_CONFIG_DIR/clickhouse-server/users.xml

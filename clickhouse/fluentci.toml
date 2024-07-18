@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Clickhouse Plugin for FluentCI"
+keywords = [
+  "clickhouse",
+]
+license = "MIT"
+name = "clickhouse"
+version = "0.1.0"

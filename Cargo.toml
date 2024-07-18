@@ -2,6 +2,7 @@
 default-members = [
   "apache",
   "caddy",
+  "clickhouse",
   "cockroachdb",
   "consul",
   "consul-template",
@@ -34,6 +35,7 @@ default-members = [
 members = [
   "apache",
   "caddy",
+  "clickhouse",
   "cockroachdb",
   "consul",
   "consul-template",
