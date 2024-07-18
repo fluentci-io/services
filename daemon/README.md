@@ -10,7 +10,7 @@ Daemon service plugin for FluentCI.
 Add the following command to your CI configuration file:
 
 ```bash
-fluentci run --wasm daemon start
+fluentci run --wasm daemon start <name> <command>
 ```
 
 ## Functions
