@@ -2,11 +2,18 @@ use anyhow::Error;
 use fluentci_pdk::dag;
 
 pub fn setup() -> Result<String, Error> {
-    dag().call(
-        "https://pkg.fluentci.io/consul@v0.1.1?wasm=1",
-        "start",
-        vec![],
-    )?;
+    if dag()
+        .pkgx()?
+        .with_exec(vec!["pkgx curl http://localhost:8500 || echo KO"])?
+        .stdout()?
+        .contains("KO")
+    {
+        dag().call(
+            "https://pkg.fluentci.io/consul@v0.1.1?wasm=1",
+            "start",
+            vec![],
+        )?;
+    }
 
     let prefix = dag().get_env("ENVCONSUL_PREFIX")?;
     if prefix.is_empty() {
