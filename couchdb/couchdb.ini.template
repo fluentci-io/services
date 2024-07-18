@@ -1,0 +1,12 @@
+[couchdb]
+database_dir = $COUCHDB_DATADIR
+single_node = true
+view_index_dir = $COUCHDB_DATADIR
+uri_file = $COUCHDB_DATADIR/couch.uri
+
+[admins]
+admin = admin
+
+[chttpd]
+bind_address = $COUCHDB_HOST
+port = $COUCHDB_PORT
