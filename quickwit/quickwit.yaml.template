@@ -1,0 +1,3 @@
+version: 0.8
+rest:
+  listen_port: $QUICKWIT_PORT

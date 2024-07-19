@@ -59,6 +59,7 @@ fluentci run --wasm postgres start
 | [nsq](./nsq)                 | A realtime distributed messaging platform |
 | [postgres](./postgres)       | A database management system that is object-relational |
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
+| [quickwit](./quickwit)       | A distributed search engine |
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
 | [stripe-mock](./stripe-mock/) | A mock HTTP server that responds like the real Stripe API. |
