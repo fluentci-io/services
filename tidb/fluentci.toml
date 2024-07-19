@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "TiDB Plugin for FluentCI"
+keywords = [
+  "tidb",
+]
+license = "MIT"
+name = "tidb"
+version = "0.1.0"

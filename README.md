@@ -64,6 +64,7 @@ fluentci run --wasm postgres start
 | [redis](./redis)             | An in-memory database that persists on disk | 
 | [stripe-mock](./stripe-mock/) | A mock HTTP server that responds like the real Stripe API. |
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
+| [tidb](./tidb)               | A distributed SQL database |
 | [typesense](./typesense)     | A fast, typo-tolerant search engine for building delightful search experiences |
 | [vault](./vault)             | A tool for managing secrets and protecting sensitive data |
 
