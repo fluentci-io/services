@@ -57,6 +57,7 @@ fluentci run --wasm postgres start
 | [nats](./nats)              | A simple, secure and high performance messaging system |
 | [nginx](./nginx)             | HTTP and reverse proxy server |
 | [nsq](./nsq)                 | A realtime distributed messaging platform |
+| [opentelemetry-collector](./opentelemetry-collector) | OpenTelemetry Collector superset with additional collectors |
 | [postgres](./postgres)       | A database management system that is object-relational |
 | [php-fpm](./php)                 | PHP FastCGI Process Manager |
 | [quickwit](./quickwit)       | A distributed search engine |

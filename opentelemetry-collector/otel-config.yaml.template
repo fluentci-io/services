@@ -1,0 +1,35 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:$OPENTELEMETRY_PORT
+      http:
+        endpoint: 0.0.0.0:$OPENTELEMETRY_HTTP_PORT
+processors:
+  batch:
+
+exporters:
+  otlp:
+    endpoint: otelcol:4317
+
+extensions:
+  health_check:
+    endpoint: localhost:13133
+  pprof:
+  zpages:
+
+service:
+  extensions: [health_check, pprof, zpages]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]

@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Opentelemetry Collector Plugin for FluentCI"
+keywords = [
+  "opentelemetry",
+]
+license = "MIT"
+name = "opentelemetry-collector"
+version = "0.1.0"
