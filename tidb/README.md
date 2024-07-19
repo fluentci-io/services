@@ -1,4 +1,4 @@
-# TiDB Local Plugin
+# TiDB Plugin
 
 [![fluentci pipeline](https://shield.fluentci.io/x/tidb)](https://pkg.fluentci.io/tidb)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/tidb.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/tidb.yml)
