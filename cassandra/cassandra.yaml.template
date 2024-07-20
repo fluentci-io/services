@@ -1,0 +1,17 @@
+start_native_transport: true
+listen_address: 127.0.0.1
+native_transport_port: $CASSANDRA_PORT
+commitlog_sync: batch
+commitlog_sync_batch_window_in_ms: 2
+cluster_name: $CASSANDRA_CLUSTER_NAME
+partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+endpoint_snitch: SimpleSnitch
+data_file_directories:
+  - $CASSANDRA_DATADIR/data
+commitlog_directory: $CASSANDRA_DATADIR/commitlog
+saved_caches_directory: $CASSANDRA_DATADIR/saved_caches
+hints_directory: $CASSANDRA_DATADIR/hints
+seed_provider:
+  - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    parameters:
+      - seeds: 127.0.0.1

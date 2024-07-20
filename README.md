@@ -35,6 +35,7 @@ fluentci run --wasm postgres start
 |------------------------------|--------------------|
 | [apache](./apache)           | A powerful and flexible HTTP/1.1 compliant web server |
 | [caddy](./caddy)             | Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS  |
+| [cassandra](./cassandra)     | A distributed NoSQL database management system |
 | [clickhouse](./clickhouse)   | An open-source column-oriented database management system |
 | [cockroachdb](./cockroachdb) | A distributed SQL database built on a transactional and strongly-consistent key-value store |
 | [consul](./consul)           | A distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure |

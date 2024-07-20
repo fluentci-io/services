@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Cassandra Plugin for FluentCI"
+keywords = [
+  "cassandra",
+]
+license = "MIT"
+name = "cassandra"
+version = "0.1.0"

@@ -2,6 +2,7 @@
 default-members = [
   "apache",
   "caddy",
+  "cassandra",
   "clickhouse",
   "cockroachdb",
   "consul",
@@ -40,6 +41,7 @@ default-members = [
 members = [
   "apache",
   "caddy",
+  "cassandra",
   "clickhouse",
   "cockroachdb",
   "consul",

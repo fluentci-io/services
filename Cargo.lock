@@ -59,6 +59,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "cassandra"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "clickhouse"
 version = "0.1.0"
 dependencies = [
