@@ -15,7 +15,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
         .with_exec(vec!["type", "cassandra"])?
-        .with_exec(vec!["cassandra", "-v"])?
+        .with_exec(vec!["cassandra", "-v", "-R"])?
         .with_exec(vec![
             "echo -e \"Cassandra starting on port $CASSANDRA_PORT\"",
         ])?
