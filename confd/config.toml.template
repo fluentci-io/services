@@ -1,0 +1,3 @@
+backend = "$CONFD_BACKEND"
+confdir = "$CONFDIR"
+watch = true

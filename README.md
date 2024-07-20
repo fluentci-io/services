@@ -38,6 +38,7 @@ fluentci run --wasm postgres start
 | [cassandra](./cassandra)     | A distributed NoSQL database management system |
 | [clickhouse](./clickhouse)   | An open-source column-oriented database management system |
 | [cockroachdb](./cockroachdb) | A distributed SQL database built on a transactional and strongly-consistent key-value store |
+| [confd](./confd)             | A lightweight configuration management tool |
 | [consul](./consul)           | A distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure |
 | [consul-template](./consul-template) | A tool for generating files based on Consul data |
 | [couchdb](./couchdb)         | A database that uses JSON for documents, JavaScript for MapReduce indexes, and regular HTTP for its API |

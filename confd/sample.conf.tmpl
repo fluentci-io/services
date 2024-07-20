@@ -1,0 +1,7 @@
+[myconfig]
+{{if exists "/myapp/database/url"}}
+database_url = {{getv "/myapp/database/url"}}
+{{end}}
+{{if exists "/myapp/database/user"}}
+database_user = {{getv "/myapp/database/user"}}
+{{end}}

@@ -1,0 +1,8 @@
+[template]
+dest = "../../sample.conf"
+keys = [
+  "myapp/database/url",
+  "myapp/database/user",
+]
+reload_cmd = "cat ../../sample.conf"
+src = "sample.conf.tmpl"

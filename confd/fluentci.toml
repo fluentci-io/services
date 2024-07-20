@@ -1,0 +1,13 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Confd Plugin for FluentCI"
+keywords = [
+  "confd",
+  "etcd",
+  "consul",
+]
+license = "MIT"
+name = "confd"
+version = "0.1.0"
