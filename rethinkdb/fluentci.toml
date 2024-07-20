@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "RethinkDB Plugin for FluentCI"
+keywords = [
+  "rethinkdb",
+]
+license = "MIT"
+name = "rethinkdb"
+version = "0.1.0"

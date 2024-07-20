@@ -63,6 +63,7 @@ fluentci run --wasm postgres start
 | [quickwit](./quickwit)       | A distributed search engine |
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
+| [rethinkdb](./rethinkdb)     | An open-source, distributed database built with love |
 | [stripe-mock](./stripe-mock/) | A mock HTTP server that responds like the real Stripe API. |
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
 | [tidb](./tidb)               | A distributed SQL database |
