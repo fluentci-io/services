@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "MailCatcher Plugin for FluentCI"
+keywords = [
+  "mailcatcher",
+]
+license = "MIT"
+name = "mailcatcher"
+version = "0.1.1"
