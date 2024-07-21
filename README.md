@@ -67,6 +67,7 @@ fluentci run --wasm postgres start
 | [rabbitmq](./rabbitmq)       | An open source multi-protocol messaging broker |
 | [redis](./redis)             | An in-memory database that persists on disk | 
 | [rethinkdb](./rethinkdb)     | An open-source, distributed database built with love |
+| [spicedb](./spicedb)         | Open Source, Google Zanzibar-inspired permissions database to enable fine-grained authorization for customer applications |
 | [stripe-mock](./stripe-mock/) | A mock HTTP server that responds like the real Stripe API. |
 | [temporal](./temporal)       | A distributed, scalable, durable, and highly available orchestration engine |
 | [tidb](./tidb)               | A distributed SQL database |
