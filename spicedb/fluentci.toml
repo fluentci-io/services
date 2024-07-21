@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "SpiceDB Plugin for FluentCI"
+keywords = [
+  "spicedb",
+]
+license = "MIT"
+name = "spicedb"
+version = "0.1.0"

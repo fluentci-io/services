@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Dgraph Plugin for FluentCI"
+keywords = [
+  "dgraph",
+]
+license = "MIT"
+name = "dgraph"
+version = "0.1.0"
