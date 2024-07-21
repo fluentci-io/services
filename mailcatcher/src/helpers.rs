@@ -1,20 +1,7 @@
 use anyhow::Error;
 use fluentci_pdk::dag;
 
-pub fn setup_flox() -> Result<(), Error> {
-    let os = dag().get_os()?;
-    if os == "macos" {
-        dag()
-        .pipeline("setup-flox")?
-        .with_exec(vec![r#"type brew > /dev/null 2> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""#])?
-        .with_exec(vec!["type flox > /dev/null 2> /dev/null || brew install flox"])?
-        .stdout()?;
-    }
-    Ok(())
-}
-
 pub fn setup() -> Result<String, Error> {
-    setup_flox()?;
     dag()
         .pipeline("setup")?
         .with_exec(vec!["mkdir", "-p", ".fluentci/mailcatcher"])?
@@ -32,20 +19,20 @@ pub fn setup() -> Result<String, Error> {
     }
 
     let stdout = dag()
-        .flox()?
+        .devbox()?
         .with_workdir(".fluentci/mailcatcher")?
         .with_exec(vec![
-            "flox",
-            "install",
+            "devbox",
+            "add",
             "ruby",
             "overmind",
             "tmux",
+            "pkg-config",
+            "openssl"
         ])?
         .with_exec(vec!["gem", "install", "mailcatcher"])?
-        .with_exec(vec!["[ -d $HOME/.local/bin ] || mkdir -p $HOME/.local/bin"])?
-        .with_exec(vec!["ln -s `flox activate -- gem environment gemhome`/bin/mailcatcher $HOME/.local/bin/mailcatcher || true"])?
         .with_exec(vec![
-            "grep -q mailcatcher: Procfile || echo -e 'mailcatcher: PATH=`flox activate -- gem environment gemhome`/bin:$PATH mailcatcher --http-port $MAILCATCHER_HTTP_PORT --smtp-port MAILCATCHER_SMTP_PORT -f \\n' >> Procfile",
+            "grep -q mailcatcher: Procfile || echo -e 'mailcatcher: devbox run mailcatcher --http-port $MAILCATCHER_HTTP_PORT --smtp-port $MAILCATCHER_SMTP_PORT -f \\n' >> Procfile",
         ])?
         .stdout()?;
 

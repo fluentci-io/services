@@ -11,17 +11,17 @@ pub fn start(_args: String) -> FnResult<String> {
     let smtp_port = dag().get_env("MAILCATCHER_SMTP_PORT")?;
 
     let stdout = dag()
-        .flox()?
+        .devbox()?
         .with_workdir(".fluentci/mailcatcher")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
-        .with_exec(vec!["PATH=`flox activate -- gem environment gemhome`/bin:$PATH && flox activate -- type mailcatcher"])?
-        .with_exec(vec!["PATH=`flox activate -- gem environment gemhome`/bin:$PATH && flox activate -- mailcatcher --version"])?
+        .with_exec(vec!["type mailcatcher"])?
+        .with_exec(vec!["mailcatcher --version"])?
         .with_exec(vec![
             "echo -e \"MailCatcher starting on port $MAILCATCHER_HTTP_PORT\"",
         ])?
         .with_exec(vec![
-            "overmind start -f Procfile --daemonize || flox activate -- overmind restart mailcatcher",
+            "overmind start -f Procfile --daemonize || devbox run overmind restart mailcatcher",
         ])?
         .wait_on(http_port.parse()?, None)?
         .wait_on(smtp_port.parse()?, None)?
@@ -41,7 +41,7 @@ pub fn stop(args: String) -> FnResult<String> {
     };
 
     let stdout = dag()
-        .flox()?
+        .devbox()?
         .with_workdir(".fluentci/mailcatcher")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
