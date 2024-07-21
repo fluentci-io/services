@@ -6,6 +6,8 @@ pub mod helpers;
 #[plugin_fn]
 pub fn start(_args: String) -> FnResult<String> {
     helpers::setup()?;
+
+    let port = dag().get_env("HTTPD_PORT")?;
     let stdout = dag()
         .flox()?
         .with_workdir(".fluentci/apache")?
@@ -19,7 +21,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || flox activate -- overmind restart web",
         ])?
-        .with_exec(vec!["sleep", "3"])?
+        .wait_on(port.parse()?, None)?
         .with_exec(vec!["overmind", "status"])?
         .with_exec(vec!["curl", "-s", "http://localhost:$HTTPD_PORT"])?
         .stdout()?;

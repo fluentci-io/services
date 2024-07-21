@@ -65,7 +65,7 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec![
             match is_root {
-                true => "chown -R fluentci /root /nix",
+                true => "chown -R fluentci /root /nix && chown -R root /root/.cache",
                 false => "true"
             }
         ])?

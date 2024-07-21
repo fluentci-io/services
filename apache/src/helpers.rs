@@ -25,6 +25,11 @@ pub fn setup() -> Result<String, Error> {
     let httpd_confdir = dag().get_env("HTTPD_CONFDIR")?;
     let httpd_error_log_file = dag().get_env("HTTPD_ERROR_LOG_FILE")?;
     let httpd_access_log_file = dag().get_env("HTTPD_ACCESS_LOG_FILE")?;
+    let is_root = dag()
+        .pkgx()?
+        .with_exec(vec!["whoami"])?
+        .stdout()?
+        .contains("root");
 
     if httpd_port.is_empty() {
         dag().set_envs(vec![("HTTPD_PORT".into(), "8080".into())])?;
@@ -60,7 +65,17 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f httpd.conf ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/httpd.conf"])?
         .with_exec(vec!["[ -f ../../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/web/index.html -O ../../index.html"])?
         .with_exec(vec![
-            "grep -q web Procfile || echo -e 'web: apachectl start -f $PWD/httpd.conf -D FOREGROUND\\n' >> Procfile",
+            match is_root {
+                true => "chown -R fluentci /root /nix && chown -R root /root/.cache",
+                false => "true"
+            }
+        ])?
+        .with_exec(vec![
+            match is_root {
+                true => "grep -q web Procfile || echo -e 'web: sudo -H -E -u fluentci PATH=$PATH bash -c \"flox activate -- apachectl start -f $PWD/httpd.conf -D FOREGROUND \" \\n' >> Procfile",
+                false => "grep -q web Procfile || echo -e 'web: apachectl start -f $PWD/httpd.conf -D FOREGROUND\\n' >> Procfile"
+            }
+            ,
         ])?
         .stdout()?;
 
