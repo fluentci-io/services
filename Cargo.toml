@@ -41,6 +41,7 @@ default-members = [
   "tidb",
   "typesense",
   "vault",
+  "zipkin",
 ]
 members = [
   "apache",
@@ -84,5 +85,6 @@ members = [
   "tidb",
   "typesense",
   "vault",
+  "zipkin",
 ]
 resolver = "2"
