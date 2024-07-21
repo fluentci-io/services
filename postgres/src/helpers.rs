@@ -23,6 +23,11 @@ pub fn setup() -> Result<String, Error> {
         .stdout()?;
 
     let pwd = dag().get_env("PWD")?;
+    let is_root = dag()
+        .pkgx()?
+        .with_exec(vec!["whoami"])?
+        .stdout()?
+        .contains("root");
     let pg_data_dir = dag().get_env("PGDATA")?;
     let pg_port = dag().get_env("PGPORT")?;
     let lc_all = dag().get_env("LC_ALL")?;
@@ -59,10 +64,23 @@ pub fn setup() -> Result<String, Error> {
             "grep -q $PGDATA .gitignore || echo $PGDATA >> .gitignore",
         ])?
         .with_exec(vec![
-            "[ -f $PGDATA/postgresql.conf ] || flox activate -- initdb",
+            match is_root {
+                true => "chown -R fluentci /root /nix",
+                false => "true"
+            }
         ])?
         .with_exec(vec![
-            "grep -q postgres Procfile || echo -e 'postgres: postgres -k $PWD -h $PGHOST -i\\n' >> Procfile",
+            match is_root {
+                true => "[ -f $PGDATA/postgresql.conf ] || sudo -H -E -u fluentci PATH=$PATH bash -c 'flox activate -- initdb'",
+                false => "[ -f $PGDATA/postgresql.conf ] || flox activate -- initdb"
+            }
+        ])?
+        .with_exec(vec![
+            match is_root {
+                true => "grep -q postgres: Procfile || echo -e 'postgres: sudo -H -E -u fluentci PATH=$PATH bash -c \"flox activate -- postgres -k $PWD -h $PGHOST -i\"\\n' >> Procfile",
+                false => 
+            "grep -q postgres: Procfile || echo -e 'postgres: postgres -k $PWD -h $PGHOST -i \\n' >> Procfile"
+            }
         ])?
         .stdout()?;
 
