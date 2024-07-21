@@ -16,6 +16,15 @@ pub fn install_influxdb() -> Result<(), Error> {
         _ => &arch,
     };
 
+    if os == "darwin" && arch == "arm64" {
+        dag()
+        .pipeline("setup-influxdb")?
+        .with_exec(vec![r#"type brew > /dev/null 2> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""#])?
+        .with_exec(vec!["type influx > /dev/null 2> /dev/null || brew install influxdb"])?
+        .stdout()?;
+        return Ok(());
+    }
+
     dag().set_envs(vec![("OS".into(), os.into()), ("ARCH".into(), arch.into())])?;
 
     let version = dag().get_env("INFLUXDB_VERSION")?;
@@ -70,7 +79,7 @@ pub fn setup() -> Result<String, Error> {
             "github.com/tmux/tmux",
         ])?
         .with_exec(vec![
-            "grep -q influxdb: Procfile || echo -e 'influxdb: influxd --http-bind-address $INFLUXDB_PORT $INFLUXDB_ARGS \\n' >> Procfile",
+            "grep -q influxdb: Procfile || echo -e 'influxdb: influxd --http-bind-address :$INFLUXDB_PORT $INFLUXDB_ARGS \\n' >> Procfile",
         ])?
         .stdout()?;
 
