@@ -51,6 +51,7 @@ fluentci run --wasm postgres start
 | [etcd](./etcd)               | A distributed key-value store |
 | [httpbin](./httpbin)         | HTTP Request & Response Service |
 | [influxdb](./influxdb)       | A time series database designed to handle high write and query loads |
+| [jaeger](./jaeger)           | A distributed tracing system |
 | [mariadb](./mariadb)         | The open source relational database |
 | [meilisearch](./meilisearch) | A powerful, fast, open-source, easy to use search engine |
 | [memcached](./memcached)     | A high-performance, distributed memory object caching system |

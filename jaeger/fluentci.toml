@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Jaeger Plugin for FluentCI"
+keywords = [
+  "jaeger",
+]
+license = "MIT"
+name = "influxdb"
+version = "0.1.0"
