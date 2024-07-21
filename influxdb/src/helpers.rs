@@ -47,7 +47,7 @@ pub fn setup() -> Result<String, Error> {
         ])?
         .with_exec(vec!["[ -f $INFLUXDB_CONFIG ] || touch $INFLUXDB_CONFIG"])?
         .with_exec(vec![
-            "grep -q influxdb: Procfile || echo -e 'influxdb: influxd -config $INFLUXDB_CONFIG \\n' >> Procfile",
+            "grep -q influxdb: Procfile || echo -e 'influxdb: influxd -config $INFLUXDB_CONFIG --http-bind-address $INFLUXDB_PORT \\n' >> Procfile",
         ])?
         .stdout()?;
 
