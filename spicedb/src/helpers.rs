@@ -21,9 +21,17 @@ pub fn setup() -> Result<String, Error> {
         .stdout()?;
 
     let spicedb_port = dag().get_env("SPICEDB_PORT")?;
+    let spicedb_preshared_key = dag().get_env("SPICEDB_PRESHARED_KEY")?;
 
     if spicedb_port.is_empty() {
         dag().set_envs(vec![("SPICEDB_PORT".into(), "50051".into())])?;
+    }
+
+    if spicedb_preshared_key.is_empty() {
+        dag().set_envs(vec![(
+            "SPICEDB_PRESHARED_KEY".into(),
+            "somerandomkeyhere".into(),
+        )])?;
     }
 
     let stdout = dag()
