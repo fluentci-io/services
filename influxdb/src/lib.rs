@@ -10,7 +10,7 @@ pub fn start(_args: String) -> FnResult<String> {
     let port = dag().get_env("INFLUXDB_PORT")?;
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci/influxdb")?
         .with_exec(vec!["overmind", "--version"])?
         .with_exec(vec!["type", "overmind"])?
@@ -37,7 +37,7 @@ pub fn stop(args: String) -> FnResult<String> {
     };
 
     let stdout = dag()
-        .flox()?
+        .pkgx()?
         .with_workdir(".fluentci/influxdb")?
         .with_exec(vec!["overmind", "stop", &args])?
         .stdout()?;
