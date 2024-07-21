@@ -74,6 +74,7 @@ fluentci run --wasm postgres start
 | [tidb](./tidb)               | A distributed SQL database |
 | [typesense](./typesense)     | A fast, typo-tolerant search engine for building delightful search experiences |
 | [vault](./vault)             | A tool for managing secrets and protecting sensitive data |
+| [zipkin](./zipkin)           | A distributed tracing system |
 
 ## 🤝 Contributing
 

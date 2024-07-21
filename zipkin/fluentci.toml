@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Zipkin Plugin for FluentCI"
+keywords = [
+  "zipkin",
+]
+license = "MIT"
+name = "zipkin"
+version = "0.1.0"
