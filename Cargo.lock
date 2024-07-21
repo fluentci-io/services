@@ -139,6 +139,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "dgraph"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "extism-pdk",
+ "fluentci-pdk",
+ "fluentci-types",
+]
+
+[[package]]
 name = "dragonflydb"
 version = "0.1.2"
 dependencies = [

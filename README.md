@@ -44,6 +44,7 @@ fluentci run --wasm postgres start
 | [couchdb](./couchdb)         | A database that uses JSON for documents, JavaScript for MapReduce indexes, and regular HTTP for its API |
 | [daemon](./daemon)           | A plugin that runs a command as a daemon |
 | [dragonflydb](./dragonflydb) | A modern replacement for Redis and Memcached |
+| [dgraph](./dgraph)           | A distributed, horizontally scalable, and low-latency graph database |
 | [dynamodb-local](./dynamodb-local) | A local version of Amazon DynamoDB |
 | [elasticmq](./elasticmq/) | A message queue system with the same semantics as Amazon SQS |
 | [envconsul](./envconsul)     | A tool that manages environment variables using HashiCorp Consul |
