@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "MailHog Plugin for FluentCI"
+keywords = [
+  "mailhog",
+]
+license = "MIT"
+name = "mailhog"
+version = "0.1.0"

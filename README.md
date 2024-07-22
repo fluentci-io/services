@@ -53,6 +53,7 @@ fluentci run --wasm postgres start
 | [influxdb](./influxdb)       | A time series database designed to handle high write and query loads |
 | [jaeger](./jaeger)           | A distributed tracing system |
 | [mailcatcher](./mailcatcher) | A simple SMTP server that catches all incoming emails |
+| [mailhog](./mailhog)         | An email testing tool for developers |
 | [mailpit](./mailpit)         | An email and SMTP testing tool with API for developers |
 | [mariadb](./mariadb)         | The open source relational database |
 | [meilisearch](./meilisearch) | A powerful, fast, open-source, easy to use search engine |
