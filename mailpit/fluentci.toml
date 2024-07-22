@@ -2,10 +2,10 @@
 authors = [
   "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
 ]
-description = "MailCatcher Plugin for FluentCI"
+description = "Mailpit Plugin for FluentCI"
 keywords = [
-  "mailcatcher",
+  "mailpit",
 ]
 license = "MIT"
-name = "mailcatcher"
+name = "mailpit"
 version = "0.1.0"
