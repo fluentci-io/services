@@ -66,7 +66,7 @@ pub fn setup() -> Result<String, Error> {
         .with_exec(vec!["[ -f ../../index.html ] || flox activate -- wget https://raw.githubusercontent.com/fluentci-io/services/main/apache/web/index.html -O ../../index.html"])?
         .with_exec(vec![
             match is_root {
-                true => "chown -R fluentci /root /nix && chown -R root /root/.cache",
+                true => "chown -R fluentci ../.. /nix",
                 false => "true"
             }
         ])?
