@@ -93,7 +93,7 @@ pub fn setup() -> Result<String, Error> {
             true => "grep -q arangodb: Procfile || echo -e 'arangodb: sudo -H -E -u fluentci PATH=$PATH bash -c \"devbox run arangod --configuration ../../arangod.conf\" \\n' >> Procfile",
             false => "grep -q arangodb: Procfile || echo -e 'arangodb: devbox run arangod --configuration ../../arangod.conf \\n' >> Procfile"
         },
-        _ => &format!("grep -q arangodb: Procfile || echo -e 'arangodb: pkgx docker run -p $ARANGODB_PORT:8529 {} arangodb:$ARANGODB_VERSION \\n' >> Procfile", envs.iter().map(|(k, v)| format!("-e {}={}", k, v)).collect::<Vec<String>>().join(" "))
+        _ => &format!("grep -q arangodb: Procfile || echo -e 'arangodb: pkgx docker run --rm -p $ARANGODB_PORT:8529 {} arangodb:$ARANGODB_VERSION \\n' >> Procfile", envs.iter().map(|(k, v)| format!("-e {}={}", k, v)).collect::<Vec<String>>().join(" "))
     };
 
     let stdout = dag()
