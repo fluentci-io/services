@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "ArangoDB Plugin for FluentCI"
+keywords = [
+  "arangodb",
+]
+license = "MIT"
+name = "arangodb"
+version = "0.1.0"

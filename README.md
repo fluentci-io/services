@@ -34,6 +34,7 @@ fluentci run --wasm postgres start
 | Name                         | Description        |
 |------------------------------|--------------------|
 | [apache](./apache)           | A powerful and flexible HTTP/1.1 compliant web server |
+| [arangodb](./arangodb)       | A distributed multi-model database |
 | [caddy](./caddy)             | Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS  |
 | [cassandra](./cassandra)     | A distributed NoSQL database management system |
 | [clickhouse](./clickhouse)   | An open-source column-oriented database management system |

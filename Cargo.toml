@@ -1,6 +1,7 @@
 [workspace]
 default-members = [
   "apache",
+  "arangodb",
   "caddy",
   "cassandra",
   "clickhouse",
@@ -49,6 +50,7 @@ default-members = [
 ]
 members = [
   "apache",
+  "arangodb",
   "caddy",
   "cassandra",
   "clickhouse",
