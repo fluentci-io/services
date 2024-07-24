@@ -27,7 +27,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "overmind start -f Procfile --daemonize || devbox run overmind restart arangodb",
         ])?
-        .wait_on(port.parse()?, None)?
+        .wait_on(port.parse()?, Some(10))?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)

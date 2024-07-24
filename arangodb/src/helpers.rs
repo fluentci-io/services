@@ -65,12 +65,35 @@ pub fn setup() -> Result<String, Error> {
             .stdout()?;
     }
 
+    let mut envs: Vec<(String, String)> = vec![];
+
+    if os == "macos" {
+        let arango_root_password = dag().get_env("ARANGO_ROOT_PASSWORD")?;
+        let arango_root_password_file = dag().get_env("ARANGO_ROOT_PASSWORD_FILE")?;
+
+        if arango_root_password.is_empty() && arango_root_password_file.is_empty() {
+            dag().set_envs(vec![("ARANGO_NO_AUTH".into(), "1".into())])?;
+            envs.push(("ARANGO_NO_AUTH".into(), "1".into()));
+        }
+
+        if !arango_root_password.is_empty() {
+            envs.push(("ARANGO_ROOT_PASSWORD".into(), arango_root_password));
+        }
+
+        if !arango_root_password_file.is_empty() {
+            envs.push((
+                "ARANGO_ROOT_PASSWORD_FILE".into(),
+                arango_root_password_file,
+            ));
+        }
+    }
+
     let command = match os.as_str() {
         "linux" => match is_root {
             true => "grep -q arangodb: Procfile || echo -e 'arangodb: sudo -H -E -u fluentci PATH=$PATH bash -c \"devbox run arangod --configuration ../../arangod.conf\" \\n' >> Procfile",
             false => "grep -q arangodb: Procfile || echo -e 'arangodb: devbox run arangod --configuration ../../arangod.conf \\n' >> Procfile"
         },
-        _ => "grep -q arangodb: Procfile || echo -e 'arangodb: pkgx docker run -p $ARANGODB_PORT:8529 arangodb:$ARANGODB_VERSION \\n' >> Procfile"
+        _ => &format!("grep -q arangodb: Procfile || echo -e 'arangodb: pkgx docker run -p $ARANGODB_PORT:8529 {} arangodb:$ARANGODB_VERSION \\n' >> Procfile", envs.iter().map(|(k, v)| format!("-e {}={}", k, v)).collect::<Vec<String>>().join(" "))
     };
 
     let stdout = dag()
