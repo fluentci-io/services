@@ -1,0 +1,11 @@
+[package]
+authors = [
+  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
+]
+description = "Neo4j Plugin for FluentCI"
+keywords = [
+  "neo4j",
+]
+license = "MIT"
+name = "neo4j"
+version = "0.1.0"

@@ -64,6 +64,7 @@ fluentci run --wasm postgres start
 | [mongodb](./mongodb)         | A general purpose, document-based, distributed database |
 | [mysql](./mysql)             | The world's most popular open source database |
 | [nats](./nats)              | A simple, secure and high performance messaging system |
+| [neo4j](./neo4j)             | A graph database management system |
 | [nginx](./nginx)             | HTTP and reverse proxy server |
 | [nsq](./nsq)                 | A realtime distributed messaging platform |
 | [opentelemetry-collector](./opentelemetry-collector) | OpenTelemetry Collector superset with additional collectors |
