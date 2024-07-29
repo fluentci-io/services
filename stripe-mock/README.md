@@ -3,7 +3,7 @@
 [![fluentci pipeline](https://shield.fluentci.io/x/stripe-mock)](https://pkg.fluentci.io/stripe-mock)
 [![ci](https://github.com/fluentci-io/services/actions/workflows/stripe-mock.yml/badge.svg)](https://github.com/fluentci-io/services/actions/workflows/stripe-mock.yml)
 
-Redis service plugin for FluentCI.
+Stripe Mock service plugin for FluentCI.
 
 ## 🚀 Usage
 
