@@ -42,3 +42,6 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}
+          MARIADB_USER: demo
+          MARIADB_PASSWORD: demo
+          MARIADB_DATABASE: demo
