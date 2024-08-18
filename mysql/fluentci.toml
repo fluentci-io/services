@@ -8,4 +8,4 @@ keywords = [
 ]
 license = "MIT"
 name = "mysql"
-version = "0.1.3"
+version = "0.1.4"
