@@ -40,25 +40,25 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec![
             "mysql",
             "-u",
-            "`whoami`",
+            "root",
             "--socket=$MYSQL_HOME/mysql.socket -e \"CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE;\"",
         ])?
         .with_exec(vec![
             "mysql",
             "-u",
-            "`whoami`",
+            "root",
             "--socket=$MYSQL_HOME/mysql.socket -e \"CREATE USER IF NOT EXISTS '$MARIADB_USER'@'localhost' IDENTIFIED BY '$MARIADB_PASSWORD';\"",
         ])?
         .with_exec(vec![
             "mysql",
             "-u",
-            "`whoami`",
+            "root",
             "--socket=$MYSQL_HOME/mysql.socket -e \"GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'localhost';\"",
         ])?
         .with_exec(vec![
             "mysql",
             "-u",
-            "`whoami`",
+            "root",
             "--socket=$MYSQL_HOME/mysql.socket -e \"FLUSH PRIVILEGES;\"",
         ])?
         .with_exec(vec!["overmind", "status"])?
