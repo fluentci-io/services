@@ -17,8 +17,8 @@ fluentci run --wasm postgres start
 
 | Name   | Description                                 |
 | ------ | --------------------------------------------|
-| start  | Start Postgres                                 |
-| stop   | Stops Postgres                                 |
+| start  | Start Postgres                              |
+| stop   | Stops Postgres                              |
 
 ## Code Usage
 
@@ -26,7 +26,7 @@ Add `fluentci-pdk` crate to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-fluentci-pdk = "0.2.1"
+fluentci-pdk = "0.2.3"
 ```
 
 Use the following code to call the plugin:
@@ -36,7 +36,7 @@ use fluentci_pdk::dag;
 
 // ...
 
-dag().call("https://pkg.fluentci.io/postgres@v0.1.4?wasm=1", "start", vec![])?;
+dag().call("https://pkg.fluentci.io/postgres@v0.1.5?wasm=1", "start", vec![])?;
 ```
 
 ## 📚 Examples

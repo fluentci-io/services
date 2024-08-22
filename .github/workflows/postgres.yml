@@ -33,3 +33,5 @@ jobs:
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GH_ACCESS_TOKEN }}
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres

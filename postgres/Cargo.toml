@@ -6,7 +6,7 @@ description = "Postgres plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "postgres"
-version = "0.1.4"
+version = "0.1.5"
 
 [lib]
 crate-type = [
