@@ -1,11 +1,7 @@
 [package]
-authors = [
-  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
-]
+authors = ["Tsiry Sandratraina <tsiry.sndr@fluentci.io>"]
 description = "Postgres Plugin for FluentCI"
-keywords = [
-  "postgres",
-]
+keywords = ["postgres"]
 license = "MIT"
 name = "postgres"
-version = "0.1.5"
+version = "0.1.6"

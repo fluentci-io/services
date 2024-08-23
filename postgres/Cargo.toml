@@ -1,17 +1,13 @@
 [package]
-authors = [
-  "Tsiry Sandratraina <tsiry.sndr@fluentci.io>",
-]
+authors = ["Tsiry Sandratraina <tsiry.sndr@fluentci.io>"]
 description = "Postgres plugin for FluentCI"
 edition = "2021"
 license = "MIT"
 name = "postgres"
-version = "0.1.5"
+version = "0.1.6"
 
 [lib]
-crate-type = [
-  "cdylib",
-]
+crate-type = ["cdylib"]
 
 [dependencies]
 anyhow = "1.0.82"

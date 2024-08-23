@@ -50,6 +50,7 @@ pub fn start(_args: String) -> FnResult<String> {
         .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"GRANT ALL ON SCHEMA public TO $POSTGRES_USER;\""])?
         .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $POSTGRES_USER;\""])?
         .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO $POSTGRES_USER;\""])?
+        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"ALTER DATABASE $POSTGRES_DB OWNER TO $POSTGRES_USER;\""])?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
