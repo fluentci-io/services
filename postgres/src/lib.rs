@@ -38,11 +38,11 @@ pub fn start(_args: String) -> FnResult<String> {
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec![
-            "psql --host=localhost -d postgres -U `whoami` -c \"CREATE DATABASE $POSTGRES_DB;\"",
+            "psql --host=localhost -d postgres -U `whoami` -c \"CREATE DATABASE $POSTGRES_DB;\" || true",
         ])?
         .with_exec(vec![
             &format!(
-                "psql --host=localhost -d postgres -U `whoami` -c \"CREATE USER $POSTGRES_USER {} CREATEDB CREATEROLE;\"", 
+                "psql --host=localhost -d postgres -U `whoami` -c \"CREATE USER $POSTGRES_USER {} CREATEDB CREATEROLE;\" || true", 
                 with_password
         )
         ])?
