@@ -11,6 +11,15 @@ pub fn start(_args: String) -> FnResult<String> {
     let pg_user = dag().get_env("POSTGRES_USER")?;
     let pg_password = dag().get_env("POSTGRES_PASSWORD")?;
     let pg_database = dag().get_env("POSTGRES_DB")?;
+    let is_root = dag()
+        .pkgx()?
+        .with_exec(vec!["whoami"])?
+        .stdout()?
+        .contains("root");
+    let user = match is_root {
+        true => "fluentci",
+        false => "`whoami`",
+    };
 
     if pg_user.is_empty() {
         dag().set_envs(vec![("POSTGRES_USER".into(), "postgres".into())])?;
@@ -38,19 +47,24 @@ pub fn start(_args: String) -> FnResult<String> {
         ])?
         .wait_on(port.parse()?, None)?
         .with_exec(vec![
-            "psql --host=localhost -d postgres -U `whoami` -c \"CREATE DATABASE $POSTGRES_DB;\" || true",
+            &format!("psql --host=localhost -d postgres -U {} -c \"CREATE DATABASE $POSTGRES_DB;\" || true", user),
         ])?
         .with_exec(vec![
             &format!(
-                "psql --host=localhost -d postgres -U `whoami` -c \"CREATE USER $POSTGRES_USER {} CREATEDB CREATEROLE;\" || true", 
+                "psql --host=localhost -d postgres -U {} -c \"CREATE USER $POSTGRES_USER {} CREATEDB CREATEROLE;\" || true", 
+                user,
                 with_password
         )
         ])?
-        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_USER;\""])?
-        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"GRANT ALL ON SCHEMA public TO $POSTGRES_USER;\""])?
-        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $POSTGRES_USER;\""])?
-        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO $POSTGRES_USER;\""])?
-        .with_exec(vec!["psql --host=localhost -d $POSTGRES_DB -U `whoami` -c \"ALTER DATABASE $POSTGRES_DB OWNER TO $POSTGRES_USER;\""])?
+        .with_exec(vec![
+            &format!("psql --host=localhost -d $POSTGRES_DB -U {} -c \"GRANT ALL PRIVILEGES ON DATABASE $POSTGRES_DB TO $POSTGRES_USER;\"", user)])?
+        .with_exec(
+            vec![
+                &format!("psql --host=localhost -d $POSTGRES_DB -U {} -c \"GRANT ALL ON SCHEMA public TO $POSTGRES_USER;\"", user)])?
+        .with_exec(vec![
+            &format!("psql --host=localhost -d $POSTGRES_DB -U {} -c \"GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $POSTGRES_USER;\"", user)])?
+        .with_exec(vec![&format!("psql --host=localhost -d $POSTGRES_DB -U {} -c \"ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO $POSTGRES_USER;\"", user)])?
+        .with_exec(vec![&format!("psql --host=localhost -d $POSTGRES_DB -U {} -c \"ALTER DATABASE $POSTGRES_DB OWNER TO $POSTGRES_USER;\"", user)])?
         .with_exec(vec!["overmind", "status"])?
         .stdout()?;
     Ok(stdout)
