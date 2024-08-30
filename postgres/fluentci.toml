@@ -4,4 +4,4 @@ description = "Postgres Plugin for FluentCI"
 keywords = ["postgres"]
 license = "MIT"
 name = "postgres"
-version = "0.1.7"
+version = "0.1.8"
