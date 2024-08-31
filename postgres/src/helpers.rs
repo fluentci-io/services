@@ -75,6 +75,7 @@ pub fn setup() -> Result<String, Error> {
                 false => "[ -f $PGDATA/postgresql.conf ] || flox activate -- initdb"
             }
         ])?
+        .with_exec(vec!["chmod", "-R", "700", "$PGDATA"])?
         .with_exec(vec![
             match is_root {
                 true => "grep -q postgres: Procfile || echo -e 'postgres: sudo -H -E -u fluentci PATH=$PATH bash -c \"flox activate -- postgres -k $PWD -h $PGHOST -i\"\\n' >> Procfile",
